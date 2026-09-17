@@ -1,29 +1,81 @@
-# Welcome to your Lovable project
+# Indianvoice.ai - Sales AI Command Center
 
-This project was built with [Lovable](https://lovable.dev).
+The **Sales AI Command Center** is a comprehensive platform for managing and deploying AI-powered voice agents for sales and customer interactions. It features a full-stack architecture with a modern web dashboard, a robust backend API, and a real-time voice agent service.
 
-## Build with Lovable
+## Project Structure
 
-Open your project in the [Lovable editor](https://lovable.dev) and keep building.
+This repository is organized into three main components:
 
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: connect the project to GitHub and every change made in Lovable is committed straight to your repository.
-- **Full ownership**: this code is yours. Push to your repository and your changes sync back into Lovable, ready for your next prompt.
+1. **Frontend** (Root directory)
+2. **Backend API** (`/backend`)
+3. **Voice Agent** (`/voice-agent`)
 
-## Development
+### Frontend (Dashboard)
+A modern, responsive web application built to manage campaigns, leads, calls, and agent configurations.
 
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+**Tech Stack:**
+- **Framework:** TanStack Start & React
+- **Styling:** Tailwind CSS & Radix UI primitives
+- **Routing:** TanStack Router
 
+**Getting Started:**
 ```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
+# Install dependencies
+npm install
+
+# Start the development server
 npm run dev
 ```
 
-## Built with
+### Backend API (`/backend`)
+A high-performance REST API that handles data persistence, business logic, authentication, and webhooks for telephony providers (e.g., Twilio, Telnyx).
 
-- TanStack Start
-- TypeScript
-- React
-- Tailwind CSS
+**Tech Stack:**
+- **Framework:** FastAPI
+- **Database:** SQLAlchemy, asyncpg (PostgreSQL), Alembic (Migrations)
+- **Background Tasks:** Redis & ARQ
+
+**Getting Started:**
+```sh
+cd backend
+
+# Create and activate a virtual environment
+python -m venv venv
+source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Start the API server
+uvicorn app.main:app --reload
+```
+
+### Voice Agent (`/voice-agent`)
+Real-time conversational AI agents powered by LiveKit, enabling low-latency voice interactions with users.
+
+**Tech Stack:**
+- **Framework:** LiveKit Agents
+- **STT/TTS/LLM:** Deepgram, Cartesia, ElevenLabs, Mistral (via OpenAI API)
+
+**Getting Started:**
+```sh
+cd voice-agent
+
+# Create and activate a virtual environment
+python -m venv venv
+source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run the agent
+python agent.py start
+```
+
+## Environment Variables
+
+Each component requires its own set of environment variables. Reference the `.env.example` files in the respective directories, create local `.env` files, and populate them with your API keys (e.g., LiveKit, LLM providers, Twilio, database credentials).
+
+## Deployment
+
+A `docker-compose.yml` is provided at the root for orchestrated multi-container deployment, allowing you to easily spin up the frontend, backend, voice-agent, and required infrastructure (like Redis or PostgreSQL) simultaneously.
