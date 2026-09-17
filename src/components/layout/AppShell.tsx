@@ -79,7 +79,7 @@ function SidebarBody({ pathname, onNavigate }: { pathname: string; onNavigate?: 
           <Waves className="size-5" aria-hidden />
         </span>
         <div className="leading-tight">
-          <p className="font-display text-sm font-semibold">VoxSales AI</p>
+          <p className="font-display text-sm font-semibold">Indianvoice.ai</p>
           <p className="text-xs text-sidebar-foreground/60">Autonomous sales calls</p>
         </div>
       </div>
@@ -208,7 +208,7 @@ export function AppShell({ children }: { children: ReactNode }) {
                   </span>
                   <span className="hidden sm:block">
                     <span className="block text-xs font-semibold text-foreground">
-                      VoxSales AI
+                      Indianvoice.ai
                     </span>
                     <span className="block text-[11px] text-muted-foreground">My Workspace</span>
                   </span>

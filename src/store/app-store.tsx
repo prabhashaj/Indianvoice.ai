@@ -1,5 +1,5 @@
 /**
- * VoxSales AI — App Store
+ * Indianvoice.ai — App Store
  * Minimal context for UI-only state that doesn't need to be persisted.
  * All entity data (agents, campaigns, leads, calls) is fetched from the
  * real FastAPI backend via TanStack Query — see src/lib/api.ts.

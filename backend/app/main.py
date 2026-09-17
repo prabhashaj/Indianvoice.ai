@@ -31,8 +31,8 @@ async def lifespan(app: FastAPI):
 
 def create_app() -> FastAPI:
     app = FastAPI(
-        title="VoxSales AI",
-        description="AI-powered voice sales platform API",
+        title="Indianvoice.ai",
+        description="India's #1 AI voice calling platform. Hindi, Telugu & English. TRAI compliant. Exotel powered.",
         version="1.0.0",
         docs_url="/docs" if settings.app_env != "production" else None,
         redoc_url="/redoc" if settings.app_env != "production" else None,

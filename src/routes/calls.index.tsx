@@ -21,7 +21,7 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/calls/")({
   head: () => ({
     meta: [
-      { title: "Call Intelligence — VoxSales AI" },
+      { title: "Call Intelligence — Indianvoice.ai" },
       {
         name: "description",
         content:

@@ -22,17 +22,20 @@ import {
   Lock,
   Clock,
   Award,
+  MessageCircle,
+  Languages,
+  IndianRupee,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/landing")({
   head: () => ({
     meta: [
-      { title: "VoxSales AI — Autonomous AI Voice Sales Platform" },
+      { title: "Indianvoice.ai — India's #1 AI Voice Sales Platform" },
       {
         name: "description",
         content:
-          "Deploy human-grade AI voice sales agents that cold call, handle objections, qualify leads and book meetings 24/7. 10× your outbound without hiring.",
+          "Deploy AI voice agents that speak Hindi, Telugu & English natively. Beat targets with TRAI-compliant outbound calling at ₹0.30/min via Exotel. Built for Bharat.",
       },
     ],
   }),
@@ -43,43 +46,52 @@ export const Route = createFileRoute("/landing")({
 
 const STATS = [
   { value: "10×", label: "More outbound dials", icon: TrendingUp },
-  { value: "58.4%", label: "Average connect rate", icon: PhoneCall },
-  { value: "<95ms", label: "AI voice response latency", icon: Zap },
-  { value: "24/7", label: "Global outbound coverage", icon: Globe2 },
+  { value: "₹0.30", label: "Per minute via Exotel", icon: IndianRupee },
+  { value: "<95ms", label: "AI voice latency", icon: Zap },
+  { value: "3", label: "Indian languages natively", icon: Languages },
 ];
 
 const FEATURES = [
   {
-    icon: Mic,
-    title: "Ultra-Low Latency Voice",
-    desc: "Sub-100ms real-time WebRTC audio via LiveKit, Deepgram Nova-2 speech recognition, and Cartesia neural voices. Conversations feel genuinely human.",
-    tag: "Voice Engine",
+    icon: Languages,
+    title: "Hindi, Telugu & English Natively",
+    desc: "Powered by Sarvam AI — the only Indian-built voice platform that truly understands Hinglish code-switching, Telugu accents, and Indian English. Not just translation, but true native understanding.",
+    tag: "Indian Languages",
+    color: "from-orange-500/20 to-amber-500/10",
+    border: "border-orange-500/20",
+    iconBg: "bg-orange-500/15 text-orange-400",
+  },
+  {
+    icon: PhoneCall,
+    title: "Exotel Native Telephony",
+    desc: "Direct PSTN calls via Exotel India at ₹0.30/min — 10× cheaper than Twilio. Indian caller IDs (+91), Jio/Airtel/BSNL/Vi routing, and sub-200ms local call latency.",
+    tag: "Indian Telephony",
     color: "from-violet-500/20 to-purple-500/10",
     border: "border-violet-500/20",
     iconBg: "bg-violet-500/15 text-violet-400",
   },
   {
-    icon: CircuitBoard,
-    title: "Mistral AI Sales Intelligence",
-    desc: "Powered by Mistral Large with dynamic finite-state sales machines. Handles pricing, timing, and competitor objections without a single hallucination.",
-    tag: "Sales Intelligence",
-    color: "from-blue-500/20 to-cyan-500/10",
-    border: "border-blue-500/20",
-    iconBg: "bg-blue-500/15 text-blue-400",
-  },
-  {
-    icon: Users,
-    title: "Autonomous CRM Sync",
-    desc: "Import CSV leads, run DNC scrubbing, deduplicate contacts, and log all call outcomes instantly to HubSpot, Salesforce, or Zoho.",
-    tag: "CRM Automation",
+    icon: ShieldCheck,
+    title: "TRAI & NDNC Compliant",
+    desc: "Automatic DND/NDNC registry scrubbing before every call. 9AM–9PM IST calling windows enforced. DPDP Act 2023 data handling. One-click consent management. Stay legal.",
+    tag: "TRAI Compliance",
     color: "from-emerald-500/20 to-teal-500/10",
     border: "border-emerald-500/20",
     iconBg: "bg-emerald-500/15 text-emerald-400",
   },
   {
+    icon: MessageCircle,
+    title: "WhatsApp Follow-ups",
+    desc: "Automatically send post-call WhatsApp messages to every prospect — call summaries, meeting links, and reminders. 500M+ Indians use WhatsApp daily. Use it.",
+    tag: "WhatsApp",
+    color: "from-green-500/20 to-emerald-500/10",
+    border: "border-green-500/20",
+    iconBg: "bg-green-500/15 text-green-400",
+  },
+  {
     icon: CalendarCheck,
     title: "Live Calendar Booking",
-    desc: "When a prospect qualifies, the AI agent checks AE availability and books calendar slots in real time — right inside the live conversation.",
+    desc: "When a prospect qualifies, the AI agent checks availability and books calendar slots in real time — right inside the live conversation, in Hindi or English.",
     tag: "Meeting Booking",
     color: "from-amber-500/20 to-orange-500/10",
     border: "border-amber-500/20",
@@ -88,20 +100,11 @@ const FEATURES = [
   {
     icon: BarChart3,
     title: "Deep Call Intelligence",
-    desc: "Every second transcribed, categorized, and scored for buying intent. Auto-generates executive summaries and next-action triggers in real time.",
+    desc: "Every second transcribed, categorized, and scored for buying intent. Auto-generates Hindi/English summaries and next-action triggers. Know exactly what was said.",
     tag: "Intelligence",
     color: "from-pink-500/20 to-rose-500/10",
     border: "border-pink-500/20",
     iconBg: "bg-pink-500/15 text-pink-400",
-  },
-  {
-    icon: Globe2,
-    title: "Multi-Market Campaigns",
-    desc: "Run unified campaigns across North America, Europe, and Asia with native English, Spanish, Hindi, and German AI personas with localized tone.",
-    tag: "Global Sales",
-    color: "from-indigo-500/20 to-blue-500/10",
-    border: "border-indigo-500/20",
-    iconBg: "bg-indigo-500/15 text-indigo-400",
   },
 ];
 
@@ -109,60 +112,64 @@ const HOW_IT_WORKS = [
   {
     step: "01",
     title: "Import Leads or Connect CRM",
-    desc: "Upload a CSV list or sync HubSpot/Salesforce leads. Automatic phone validation and National DNC compliance checks run instantly.",
+    desc: "Upload a CSV of Indian leads or sync from HubSpot/Zoho. Automatic phone validation, DND scrubbing against TRAI NDNC registry, and timezone-aware scheduling run instantly.",
     icon: Users,
   },
   {
     step: "02",
     title: "Configure AI Voice Persona",
-    desc: "Select a voice, define value propositions, set qualification criteria (BANT), and upload your objection playbooks in plain English.",
+    desc: "Pick Hindi, Telugu or English. Choose an Indian-accent voice. Define your pitch, objection playbook, and qualification criteria in plain language — no code needed.",
     icon: CircuitBoard,
   },
   {
     step: "03",
-    title: "Launch Autonomous Campaigns",
-    desc: "AI agents dial concurrently, hold human-like conversations, score buying intent in real time, and automatically book meetings.",
+    title: "Launch TRAI-Compliant Campaigns",
+    desc: "AI agents dial via Exotel, hold natural conversations in the prospect's preferred language, and automatically book meetings or send WhatsApp follow-ups.",
     icon: Sparkles,
   },
 ];
 
 const TESTIMONIALS = [
   {
-    quote: "We scaled from 250 dials/day to 3,500 daily dials. Our AE calendars are packed with qualified demos while our CAC dropped by 72%.",
-    name: "Prabhash Jain",
-    title: "Founder & CEO, Northstar Enterprise",
-    role: "B2B SaaS · 14,000+ Dials Monthly",
-    initials: "PJ",
+    quote: "Hamari team roz 3,500 calls karti hai bina ek bhi SDR ke. Hindi mein baat karta hai bilkul aadmi jaisa. CAC 72% kam ho gayi.",
+    name: "Prabhash Reddy",
+    title: "Founder & CEO, Northstar Ventures",
+    role: "B2B SaaS · Hyderabad · 14,000+ Dials/Month",
+    initials: "PR",
     stars: 5,
+    lang: "हिंदी",
   },
   {
-    quote: "The objection handling is astonishing. When prospects say 'we're happy with our vendor', VoxSales pivots with targeted ROI metrics that consistently earn meetings.",
-    name: "Elena Rostova",
-    title: "VP Revenue Operations, ScaleFlow Global",
-    role: "Fintech · 28 AEs Supported",
-    initials: "ER",
+    quote: "Telugu lo matladu tundi — prospects chala surprised avutunnaru. Connect rate 58% ki vachindi. Vapi try chesamu but India lo pani chesedi kadu.",
+    name: "Venkata Suresh",
+    title: "VP Sales, AgriTech Solutions",
+    role: "AgriTech · Vijayawada · Telugu Campaigns",
+    initials: "VS",
     stars: 5,
+    lang: "తెలుగు",
   },
   {
-    quote: "Inbound leads are now contacted within 18 seconds of form submission. Our connect-to-meeting rate jumped to 14.8%.",
-    name: "Marcus Sterling",
-    title: "Head of Growth, Apex Cloud Systems",
-    role: "Cloud Infrastructure · 3.8× Pipeline Growth",
-    initials: "MS",
+    quote: "Inbound leads are contacted within 18 seconds of form submission. Our connect-to-meeting rate jumped to 14.8%. Exotel integration means ₹0.30/min, not ₹4.",
+    name: "Nisha Kapoor",
+    title: "Head of Growth, FinTech Startup",
+    role: "Fintech · Mumbai · 3.8× Pipeline Growth",
+    initials: "NK",
     stars: 5,
+    lang: "English",
   },
 ];
 
 const PRICING = [
   {
-    name: "Starter",
-    price: "$399",
+    name: "Startup",
+    price: "₹9,999",
     period: "/month",
-    desc: "For early-stage teams testing AI outbound.",
+    desc: "For early-stage Indian teams testing AI outbound.",
     features: [
       "3 AI agent personas",
-      "5,000 dials/month",
-      "Basic CRM sync (CSV)",
+      "5,000 dials/month via Exotel",
+      "Hindi + English voice",
+      "TRAI DND auto-scrubbing",
       "Call recordings & transcripts",
       "Email support",
     ],
@@ -170,14 +177,16 @@ const PRICING = [
     highlight: false,
   },
   {
-    name: "Scale",
-    price: "$899",
+    name: "Growth",
+    price: "₹29,999",
     period: "/month",
-    desc: "For growing teams running high-volume outbound.",
+    desc: "For growing Indian teams running high-volume outbound.",
     features: [
       "10 AI agent personas",
-      "25,000 dials/month",
-      "HubSpot & Salesforce sync",
+      "25,000 dials/month via Exotel",
+      "Hindi + Telugu + English",
+      "WhatsApp follow-ups",
+      "Zoho & HubSpot sync",
       "Live calendar booking",
       "Sentiment & intent scoring",
       "Priority support",
@@ -190,13 +199,15 @@ const PRICING = [
     name: "Enterprise",
     price: "Custom",
     period: "",
-    desc: "For sales-led orgs requiring dedicated infrastructure.",
+    desc: "For Indian enterprises requiring dedicated infrastructure.",
     features: [
       "Unlimited agent personas",
       "Unlimited dials",
-      "All CRM integrations",
-      "Dedicated LiveKit cluster",
+      "All 3 Indian languages",
       "Custom voice training",
+      "Dedicated LiveKit cluster",
+      "Salesforce / SAP integration",
+      "DPDP Act compliance audit",
       "SLA + dedicated CSM",
     ],
     cta: "Book a demo",
@@ -210,15 +221,40 @@ function LiveCallWidget() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTurn, setCurrentTurn] = useState(0);
   const [intentScore, setIntentScore] = useState(42);
+  const [activeLanguage, setActiveLanguage] = useState<"hindi" | "telugu" | "english">("hindi");
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  const dialogue = [
-    { speaker: "AI", text: "Hi Rahul, this is Alex from VoxSales. I noticed your team is scaling outbound — do you have 30 seconds?", duration: 3500, intent: 48 },
-    { speaker: "Prospect", text: "Hey Alex, we do have SDRs, but what makes this different from a standard dialer?", duration: 3000, intent: 62 },
-    { speaker: "AI", text: "Great question. Unlike dialers, our agents hold the complete qualification conversation and book meetings directly to your AE's calendar.", duration: 4000, intent: 84 },
-    { speaker: "Prospect", text: "Interesting — so the AI fully qualifies them? Can we see a demo this Friday at 3 PM?", duration: 3500, intent: 96 },
-    { speaker: "AI", text: "Absolutely! I've placed Friday 3 PM on your calendar and sent a confirmation to your email. Looking forward to it!", duration: 3000, intent: 98 },
-  ];
+  const dialogues = {
+    hindi: [
+      { speaker: "AI", text: "Namaste Rahul ji! Main Priya hun Indianvoice.ai se. Bas 30 seconds chahiye — kya aap apni sales team ke liye kuch better karna chahenge?", duration: 4000, intent: 48 },
+      { speaker: "Prospect", text: "Haan, batao. Abhi hamare SDRs manually call karte hain, bahut time waste hota hai.", duration: 3000, intent: 65 },
+      { speaker: "AI", text: "Bilkul samajh gaya. Hamare AI agents Hindi mein full qualification conversation karte hain aur meeting book kar dete hain — aapke AE ko bas close karna hota hai.", duration: 4000, intent: 82 },
+      { speaker: "Prospect", text: "Yeh interesting hai. Kya ek demo dekh sakte hain is Friday ko?", duration: 3000, intent: 94 },
+      { speaker: "AI", text: "Zaroor! Friday 3 baje confirm kar diya. Calendar invite aapke email pe aa jayega. Bahut shukriya Rahul ji!", duration: 3000, intent: 98 },
+    ],
+    telugu: [
+      { speaker: "AI", text: "Namaskaram! Nenu Priya, Indianvoice.ai nunchi. Mee sales team kosam 30 seconds matladatama?", duration: 4000, intent: 48 },
+      { speaker: "Prospect", text: "Cheppandi. Maa team chala time manual calls ki waste chestundi.", duration: 3000, intent: 62 },
+      { speaker: "AI", text: "Artham chesukunnanu. Maa AI agents Telugu lo matladi leads qualify chesi meetings book chestai — completely automatic ga.", duration: 4000, intent: 84 },
+      { speaker: "Prospect", text: "Baagundi. Demo choodaniki interest ga unnanu. Friday avutunda?", duration: 3000, intent: 96 },
+      { speaker: "AI", text: "Avunu! Friday 3PM confirm chesamu. Calendar invite mee email ki vastundi. Dhanyavaadamulu!", duration: 3000, intent: 98 },
+    ],
+    english: [
+      { speaker: "AI", text: "Hi Rahul! This is Priya from Indianvoice.ai. Quick question — how many SDRs does your team have for outbound today?", duration: 3500, intent: 48 },
+      { speaker: "Prospect", text: "We have 5 SDRs but they spend most of their time just dialing. What makes you different?", duration: 3000, intent: 62 },
+      { speaker: "AI", text: "Unlike dialers, our AI agents hold the complete Hindi/English qualification conversation and book meetings directly — all via Exotel at ₹0.30/min.", duration: 4000, intent: 84 },
+      { speaker: "Prospect", text: "That's impressive. Can we schedule a demo this Friday at 3 PM?", duration: 3500, intent: 96 },
+      { speaker: "AI", text: "Absolutely! Friday 3 PM is confirmed. You'll receive a calendar invite shortly. Looking forward to it!", duration: 3000, intent: 98 },
+    ],
+  };
+
+  const dialogue = dialogues[activeLanguage];
+
+  useEffect(() => {
+    setCurrentTurn(0);
+    setIntentScore(42);
+    setIsPlaying(false);
+  }, [activeLanguage]);
 
   useEffect(() => {
     let timer: any;
@@ -236,7 +272,7 @@ function LiveCallWidget() {
       }
     }
     return () => clearTimeout(timer);
-  }, [isPlaying, currentTurn]);
+  }, [isPlaying, currentTurn, dialogue]);
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -244,16 +280,45 @@ function LiveCallWidget() {
     }
   }, [currentTurn]);
 
+  const langLabels = { hindi: "हिंदी", telugu: "తెలుగు", english: "English" };
+
   return (
     <div className="relative w-full max-w-lg">
       {/* Glow behind card */}
-      <div className="absolute inset-0 -z-10 rounded-3xl bg-violet-500/20 blur-3xl scale-110" />
+      <div className="absolute inset-0 -z-10 rounded-3xl bg-orange-500/15 blur-3xl scale-110" />
 
       <div className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-2xl shadow-2xl overflow-hidden">
+        {/* Language Selector */}
+        <div className="flex items-center gap-1.5 border-b border-white/10 px-4 py-3">
+          <Languages className="size-3.5 text-white/40 mr-1" />
+          {(["hindi", "telugu", "english"] as const).map((lang) => (
+            <button
+              key={lang}
+              type="button"
+              onClick={() => setActiveLanguage(lang)}
+              className={cn(
+                "rounded-lg px-3 py-1 text-[11px] font-bold transition-all",
+                activeLanguage === lang
+                  ? "bg-orange-500 text-white shadow"
+                  : "text-white/40 hover:text-white hover:bg-white/10"
+              )}
+            >
+              {langLabels[lang]}
+            </button>
+          ))}
+          <div className="ml-auto flex items-center gap-1.5 text-[10px] text-emerald-400 font-medium">
+            <span className="relative flex size-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+              <span className="relative inline-flex size-2 rounded-full bg-emerald-500" />
+            </span>
+            Exotel Live
+          </div>
+        </div>
+
         {/* Header */}
         <div className="flex items-center justify-between border-b border-white/10 px-5 py-4">
           <div className="flex items-center gap-3">
-            <div className="relative flex size-9 items-center justify-center rounded-xl bg-violet-500 shadow-lg">
+            <div className="relative flex size-9 items-center justify-center rounded-xl bg-orange-500 shadow-lg">
               <Waves className="size-4 text-white" />
               {isPlaying && (
                 <span className="absolute -top-1 -right-1 flex size-3">
@@ -263,8 +328,8 @@ function LiveCallWidget() {
               )}
             </div>
             <div>
-              <p className="text-sm font-semibold text-white">Live Call Simulation</p>
-              <p className="text-xs text-white/50">Alex (AI SDR) × Rahul Sharma (VP Sales)</p>
+              <p className="text-sm font-semibold text-white">Live Call Demo</p>
+              <p className="text-xs text-white/50">Priya (AI Agent) × Rahul Sharma</p>
             </div>
           </div>
           <div className="flex items-center gap-2">
@@ -285,7 +350,7 @@ function LiveCallWidget() {
                 "flex items-center gap-1.5 rounded-xl px-3.5 py-1.5 text-xs font-bold shadow-lg transition-all active:scale-95",
                 isPlaying
                   ? "bg-white/10 text-white/70 hover:bg-white/20"
-                  : "bg-violet-500 text-white hover:bg-violet-400"
+                  : "bg-orange-500 text-white hover:bg-orange-400"
               )}
             >
               {isPlaying ? <><Pause className="size-3 fill-current" />Pause</> : <><Play className="size-3 fill-current" />Play demo</>}
@@ -300,14 +365,14 @@ function LiveCallWidget() {
             <div
               className={cn(
                 "h-full rounded-full transition-all duration-1000",
-                intentScore > 80 ? "bg-emerald-400" : intentScore > 60 ? "bg-amber-400" : "bg-violet-400"
+                intentScore > 80 ? "bg-emerald-400" : intentScore > 60 ? "bg-amber-400" : "bg-orange-400"
               )}
               style={{ width: `${intentScore}%` }}
             />
           </div>
           <span className={cn(
             "text-xs font-bold tabular-nums",
-            intentScore > 80 ? "text-emerald-400" : intentScore > 60 ? "text-amber-400" : "text-violet-400"
+            intentScore > 80 ? "text-emerald-400" : intentScore > 60 ? "text-amber-400" : "text-orange-400"
           )}>{intentScore}/100</span>
         </div>
 
@@ -322,7 +387,7 @@ function LiveCallWidget() {
               )}
             >
               {turn.speaker === "AI" && (
-                <span className="mt-0.5 shrink-0 rounded-md bg-violet-500/30 px-1.5 py-0.5 text-[10px] font-bold text-violet-300 h-fit">AI</span>
+                <span className="mt-0.5 shrink-0 rounded-md bg-orange-500/30 px-1.5 py-0.5 text-[10px] font-bold text-orange-300 h-fit">AI</span>
               )}
               <p className={cn(
                 "max-w-[85%] rounded-2xl px-3.5 py-2.5 leading-relaxed",
@@ -339,7 +404,7 @@ function LiveCallWidget() {
           ))}
           {!isPlaying && currentTurn === 0 && (
             <div className="flex h-full items-center justify-center">
-              <p className="text-xs text-white/30">Press Play to run the AI call demo</p>
+              <p className="text-xs text-white/30">Select a language and press Play</p>
             </div>
           )}
         </div>
@@ -347,10 +412,10 @@ function LiveCallWidget() {
         {/* Footer badges */}
         <div className="flex items-center justify-between border-t border-white/10 px-5 py-3">
           <span className="flex items-center gap-1.5 text-[11px] text-white/40">
-            <CheckCircle2 className="size-3.5 text-emerald-400" /> Calendar synced
+            <ShieldCheck className="size-3.5 text-emerald-400" /> TRAI Compliant
           </span>
           <span className="flex items-center gap-1.5 text-[11px] text-white/40">
-            <Zap className="size-3.5 text-violet-400" /> Sub-100ms LiveKit WebRTC
+            <IndianRupee className="size-3.5 text-orange-400" /> ₹0.30/min via Exotel
           </span>
         </div>
       </div>
@@ -361,9 +426,9 @@ function LiveCallWidget() {
 // ─── Stat Counter ─────────────────────────────────────────────────────────────
 function AnimatedStat({ value, label, icon: Icon }: { value: string; label: string; icon: typeof TrendingUp }) {
   return (
-    <div className="group flex flex-col gap-1 rounded-2xl border border-white/10 bg-white/5 px-6 py-5 backdrop-blur-sm transition-all hover:border-violet-500/30 hover:bg-white/8">
+    <div className="group flex flex-col gap-1 rounded-2xl border border-white/10 bg-white/5 px-6 py-5 backdrop-blur-sm transition-all hover:border-orange-500/30 hover:bg-white/8">
       <div className="flex items-center gap-2 mb-1">
-        <Icon className="size-4 text-violet-400" />
+        <Icon className="size-4 text-orange-400" />
       </div>
       <span className="font-display text-3xl font-extrabold text-white tracking-tight">{value}</span>
       <span className="text-sm text-white/50">{label}</span>
@@ -383,10 +448,10 @@ function LandingPage() {
       <header className="sticky top-0 z-50 border-b border-white/5 bg-[#080b14]/80 backdrop-blur-xl">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
           <Link to="/landing" className="flex items-center gap-2.5">
-            <span className="flex size-8 items-center justify-center rounded-xl bg-violet-600 shadow-lg shadow-violet-500/25">
+            <span className="flex size-8 items-center justify-center rounded-xl bg-orange-600 shadow-lg shadow-orange-500/25">
               <Waves className="size-4 text-white" />
             </span>
-            <span className="font-display text-base font-bold text-white tracking-tight">VoxSales AI</span>
+            <span className="font-display text-base font-bold text-white tracking-tight">Indianvoice<span className="text-orange-400">.ai</span></span>
           </Link>
 
           <nav className="hidden md:flex items-center gap-6">
@@ -404,9 +469,9 @@ function LandingPage() {
             </Link>
             <Link
               to="/login"
-              className="flex items-center gap-1.5 rounded-xl bg-violet-600 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-violet-500/25 transition-all hover:bg-violet-500 active:scale-95"
+              className="flex items-center gap-1.5 rounded-xl bg-orange-600 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-orange-500/25 transition-all hover:bg-orange-500 active:scale-95"
             >
-              Get free demo <ArrowRight className="size-3.5" />
+              Free demo <ArrowRight className="size-3.5" />
             </Link>
           </div>
         </div>
@@ -418,28 +483,34 @@ function LandingPage() {
         <div className="pointer-events-none absolute inset-0">
           <div className="absolute inset-0 opacity-[0.04]"
             style={{ backgroundImage: "linear-gradient(white 1px, transparent 1px), linear-gradient(90deg, white 1px, transparent 1px)", backgroundSize: "44px 44px" }} />
-          <div className="absolute -top-40 left-1/2 -translate-x-1/2 size-[700px] rounded-full bg-violet-600/15 blur-[120px]" />
-          <div className="absolute top-20 -right-40 size-80 rounded-full bg-blue-600/10 blur-3xl" />
-          <div className="absolute bottom-0 -left-20 size-60 rounded-full bg-indigo-600/10 blur-3xl" />
+          <div className="absolute -top-40 left-1/2 -translate-x-1/2 size-[700px] rounded-full bg-orange-600/12 blur-[120px]" />
+          <div className="absolute top-20 -right-40 size-80 rounded-full bg-amber-600/10 blur-3xl" />
+          <div className="absolute bottom-0 -left-20 size-60 rounded-full bg-orange-600/8 blur-3xl" />
         </div>
 
         <div className="relative mx-auto max-w-7xl">
+          {/* Trust badge */}
+          <div className="flex justify-center lg:justify-start mb-8">
+            <span className="inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-500/10 px-4 py-1.5 text-xs font-semibold text-orange-400">
+              🇮🇳 Built for Bharat — India's #1 AI Voice Platform
+            </span>
+          </div>
 
           <div className="grid items-center gap-16 lg:grid-cols-2">
             {/* Left copy */}
             <div className="text-center lg:text-left">
               <h1 className="font-display text-5xl font-extrabold leading-[1.05] tracking-tight text-white md:text-6xl xl:text-7xl">
-                AI That Sells.{" "}
-                <span className="bg-gradient-to-r from-violet-400 via-purple-400 to-blue-400 bg-clip-text text-transparent">
-                  24/7.
+                AI Calls India.{" "}
+                <span className="bg-gradient-to-r from-orange-400 via-amber-400 to-yellow-400 bg-clip-text text-transparent">
+                  In Hindi.
                 </span>
               </h1>
               <p className="mt-6 text-lg leading-relaxed text-white/55 md:text-xl max-w-xl mx-auto lg:mx-0">
-                Deploy human-grade AI voice agents that cold call, handle objections, qualify leads, and book meetings — entirely autonomously.
+                Deploy AI voice agents that speak <strong className="text-white/80">Hindi, Telugu & English</strong> natively. TRAI-compliant outbound calling at ₹0.30/min via Exotel. No code needed.
               </p>
 
               <div className="mt-3 flex flex-wrap items-center gap-2 justify-center lg:justify-start">
-                {["No hiring", "No training", "No burnout"].map((item) => (
+                {["TRAI Compliant", "Exotel India", "Sarvam AI"].map((item) => (
                   <span key={item} className="inline-flex items-center gap-1.5 rounded-full bg-white/5 border border-white/10 px-3 py-1 text-xs text-white/60">
                     <CheckCircle2 className="size-3 text-emerald-400" /> {item}
                   </span>
@@ -449,9 +520,9 @@ function LandingPage() {
               <div className="mt-10 flex flex-wrap items-center gap-4 justify-center lg:justify-start">
                 <Link
                   to="/login"
-                  className="inline-flex items-center gap-2 rounded-2xl bg-violet-600 px-7 py-3.5 text-base font-bold text-white shadow-xl shadow-violet-500/30 transition-all hover:bg-violet-500 hover:shadow-violet-500/40 hover:scale-105 active:scale-100"
+                  className="inline-flex items-center gap-2 rounded-2xl bg-orange-600 px-7 py-3.5 text-base font-bold text-white shadow-xl shadow-orange-500/30 transition-all hover:bg-orange-500 hover:shadow-orange-500/40 hover:scale-105 active:scale-100"
                 >
-                  Get started free <ArrowRight className="size-4" />
+                  शुरू करें — Free <ArrowRight className="size-4" />
                 </Link>
                 <Link
                   to="/login"
@@ -470,8 +541,6 @@ function LandingPage() {
         </div>
       </section>
 
-
-
       {/* ── Stats ────────────────────────────────────────────────────────────── */}
       <section className="py-16 px-6">
         <div className="mx-auto max-w-7xl">
@@ -485,15 +554,15 @@ function LandingPage() {
       <section id="features" className="py-20 px-6">
         <div className="mx-auto max-w-7xl">
           <div className="mb-14 text-center">
-            <span className="inline-block rounded-full border border-violet-500/30 bg-violet-500/10 px-3.5 py-1 text-xs font-semibold text-violet-400 mb-4">
+            <span className="inline-block rounded-full border border-orange-500/30 bg-orange-500/10 px-3.5 py-1 text-xs font-semibold text-orange-400 mb-4">
               Platform capabilities
             </span>
             <h2 className="font-display text-4xl font-extrabold text-white md:text-5xl">
               Everything your sales team needs,{" "}
-              <span className="text-white/40">handled by AI.</span>
+              <span className="text-white/40">for India.</span>
             </h2>
             <p className="mt-4 text-lg text-white/45 max-w-2xl mx-auto">
-              From first dial to booked meeting — the entire outbound motion, fully automated.
+              From first dial to booked meeting — in Hindi, Telugu, or English. Fully automated, fully TRAI-compliant.
             </p>
           </div>
 
@@ -502,18 +571,18 @@ function LandingPage() {
               <div
                 key={f.title}
                 className={cn(
-                  "group rounded-2xl border p-6 transition-all hover:scale-[1.02] hover:shadow-xl hover:shadow-black/30",
-                  f.border,
-                  `bg-gradient-to-br ${f.color}`
+                  "group rounded-2xl border bg-gradient-to-br p-6 transition-all hover:shadow-lg",
+                  f.color,
+                  f.border
                 )}
               >
-                <div className={cn("mb-4 inline-flex size-10 items-center justify-center rounded-xl", f.iconBg)}>
+                <div className={cn("mb-4 inline-flex size-11 items-center justify-center rounded-xl", f.iconBg)}>
                   <f.icon className="size-5" />
                 </div>
-                <span className="mb-2 inline-block rounded-full bg-white/5 border border-white/10 px-2.5 py-0.5 text-[11px] font-semibold text-white/40 uppercase tracking-wider">
-                  {f.tag}
-                </span>
-                <h3 className="mb-2 text-base font-bold text-white">{f.title}</h3>
+                <div className="mb-1.5">
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-white/30">{f.tag}</span>
+                </div>
+                <h3 className="text-lg font-bold text-white mb-2">{f.title}</h3>
                 <p className="text-sm text-white/50 leading-relaxed">{f.desc}</p>
               </div>
             ))}
@@ -523,105 +592,124 @@ function LandingPage() {
 
       {/* ── How it Works ─────────────────────────────────────────────────────── */}
       <section id="how-it-works" className="py-20 px-6">
-        <div className="mx-auto max-w-7xl">
-          <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-10 md:p-16">
-            <div className="mb-14 text-center">
-              <span className="inline-block rounded-full border border-blue-500/30 bg-blue-500/10 px-3.5 py-1 text-xs font-semibold text-blue-400 mb-4">
-                Setup in &lt;15 minutes
-              </span>
-              <h2 className="font-display text-4xl font-extrabold text-white md:text-5xl">
-                From zero to first booked meeting
-              </h2>
-            </div>
-
-            <div className="relative grid gap-8 md:grid-cols-3">
-              {/* Connector line */}
-              <div className="absolute top-8 left-1/4 right-1/4 hidden h-px bg-gradient-to-r from-violet-500/50 via-blue-500/50 to-emerald-500/50 md:block" style={{ width: "50%", left: "25%" }} />
-
-              {HOW_IT_WORKS.map((step, i) => (
-                <div key={step.step} className="relative text-center">
-                  <div className={cn(
-                    "mx-auto mb-5 flex size-16 items-center justify-center rounded-2xl border shadow-lg",
-                    i === 0 ? "bg-violet-500/15 border-violet-500/30 text-violet-400" :
-                    i === 1 ? "bg-blue-500/15 border-blue-500/30 text-blue-400" :
-                    "bg-emerald-500/15 border-emerald-500/30 text-emerald-400"
-                  )}>
-                    <step.icon className="size-7" />
-                  </div>
-                  <div className={cn(
-                    "mb-3 inline-block font-display text-5xl font-black opacity-10",
-                    i === 0 ? "text-violet-400" : i === 1 ? "text-blue-400" : "text-emerald-400"
-                  )}>
-                    {step.step}
-                  </div>
-                  <h3 className="mb-2 text-lg font-bold text-white">{step.title}</h3>
-                  <p className="text-sm text-white/45 leading-relaxed">{step.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Testimonials ─────────────────────────────────────────────────────── */}
-      <section id="case-studies" className="py-20 px-6">
-        <div className="mx-auto max-w-7xl">
+        <div className="mx-auto max-w-5xl">
           <div className="mb-14 text-center">
-            <span className="inline-block rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3.5 py-1 text-xs font-semibold text-emerald-400 mb-4">
-              Customer stories
+            <span className="inline-block rounded-full border border-orange-500/30 bg-orange-500/10 px-3.5 py-1 text-xs font-semibold text-orange-400 mb-4">
+              How it works
             </span>
             <h2 className="font-display text-4xl font-extrabold text-white md:text-5xl">
-              Real results. Real revenue.
+              Live in 30 minutes.{" "}
+              <span className="text-white/40">Seriously.</span>
             </h2>
           </div>
-
-          <div className="grid gap-5 md:grid-cols-3">
-            {TESTIMONIALS.map((t, i) => (
-              <div
-                key={t.name}
-                onClick={() => setActiveTestimonial(i)}
-                className={cn(
-                  "group cursor-pointer rounded-2xl border p-7 transition-all hover:scale-[1.02]",
-                  activeTestimonial === i
-                    ? "border-violet-500/40 bg-violet-500/10"
-                    : "border-white/8 bg-white/[0.03] hover:border-white/15"
-                )}
-              >
-                {/* Stars */}
-                <div className="flex gap-0.5 mb-4">
-                  {Array.from({ length: t.stars }).map((_, j) => (
-                    <Star key={j} className="size-3.5 fill-amber-400 text-amber-400" />
-                  ))}
-                </div>
-                <blockquote className="mb-5 text-sm text-white/70 leading-relaxed">
-                  &ldquo;{t.quote}&rdquo;
-                </blockquote>
-                <div className="flex items-center gap-3 border-t border-white/8 pt-4">
-                  <div className="flex size-9 items-center justify-center rounded-full bg-violet-500/20 text-xs font-bold text-violet-300">
-                    {t.initials}
-                  </div>
-                  <div>
-                    <p className="text-sm font-semibold text-white">{t.name}</p>
-                    <p className="text-xs text-white/40">{t.role}</p>
+          <div className="grid gap-6 md:grid-cols-3">
+            {HOW_IT_WORKS.map((step) => (
+              <div key={step.step} className="rounded-2xl border border-white/8 bg-white/3 p-7">
+                <div className="mb-5 flex items-center gap-3">
+                  <span className="font-display text-4xl font-extrabold text-orange-500/30">{step.step}</span>
+                  <div className="flex size-9 items-center justify-center rounded-xl bg-orange-500/10">
+                    <step.icon className="size-4 text-orange-400" />
                   </div>
                 </div>
+                <h3 className="text-base font-bold text-white mb-2">{step.title}</h3>
+                <p className="text-sm text-white/45 leading-relaxed">{step.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── Pricing ──────────────────────────────────────────────────────────── */}
-      <section id="pricing" className="py-20 px-6">
-        <div className="mx-auto max-w-7xl">
+      {/* ── TRAI Compliance Banner ─────────────────────────────────────────── */}
+      <section className="py-12 px-6">
+        <div className="mx-auto max-w-4xl">
+          <div className="rounded-2xl border border-emerald-500/20 bg-emerald-500/5 p-8 text-center">
+            <ShieldCheck className="size-10 text-emerald-400 mx-auto mb-4" />
+            <h3 className="text-2xl font-bold text-white mb-2">100% TRAI & DPDP Act Compliant</h3>
+            <p className="text-white/50 max-w-xl mx-auto mb-6">
+              Automatic NDNC/DND registry scrubbing. Strict 9AM–9PM IST calling windows. DPDP Act 2023 data handling. One-click opt-out management. Never get fined again.
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-4">
+              {["TRAI NDNC Scrubbing", "9AM–9PM IST Enforced", "DPDP Act 2023", "Auto Opt-out", "Call Frequency Limits"].map((item) => (
+                <span key={item} className="flex items-center gap-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 px-3 py-1 text-xs text-emerald-400">
+                  <CheckCircle2 className="size-3" /> {item}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Testimonials / Case Studies ───────────────────────────────────── */}
+      <section id="case-studies" className="py-20 px-6">
+        <div className="mx-auto max-w-4xl">
           <div className="mb-14 text-center">
-            <span className="inline-block rounded-full border border-amber-500/30 bg-amber-500/10 px-3.5 py-1 text-xs font-semibold text-amber-400 mb-4">
-              Pricing
+            <span className="inline-block rounded-full border border-orange-500/30 bg-orange-500/10 px-3.5 py-1 text-xs font-semibold text-orange-400 mb-4">
+              Customer stories
             </span>
             <h2 className="font-display text-4xl font-extrabold text-white md:text-5xl">
-              Simple, usage-based pricing
+              Indian teams love it.
             </h2>
-            <p className="mt-4 text-lg text-white/45">No setup fees. No per-seat charges. Cancel anytime.</p>
+          </div>
+
+          {/* Testimonial tabs */}
+          <div className="flex justify-center gap-2 mb-8">
+            {TESTIMONIALS.map((t, i) => (
+              <button
+                key={i}
+                type="button"
+                onClick={() => setActiveTestimonial(i)}
+                className={cn(
+                  "rounded-full px-4 py-1.5 text-xs font-bold transition-all",
+                  activeTestimonial === i
+                    ? "bg-orange-500 text-white"
+                    : "border border-white/10 text-white/40 hover:text-white"
+                )}
+              >
+                {t.lang}
+              </button>
+            ))}
+          </div>
+
+          {/* Active testimonial */}
+          {(() => {
+            const t = TESTIMONIALS[activeTestimonial];
+            return (
+              <div className="rounded-2xl border border-white/10 bg-white/5 p-8 md:p-10 text-center">
+                <div className="flex justify-center gap-0.5 mb-6">
+                  {Array.from({ length: t.stars }).map((_, i) => (
+                    <Star key={i} className="size-4 fill-amber-400 text-amber-400" />
+                  ))}
+                </div>
+                <p className="text-lg md:text-xl text-white/80 leading-relaxed font-medium mb-8">
+                  "{t.quote}"
+                </p>
+                <div className="flex items-center justify-center gap-3">
+                  <div className="flex size-10 items-center justify-center rounded-full bg-orange-500/20 text-sm font-bold text-orange-300">
+                    {t.initials}
+                  </div>
+                  <div className="text-left">
+                    <p className="text-sm font-bold text-white">{t.name}</p>
+                    <p className="text-xs text-white/40">{t.title}</p>
+                    <p className="text-xs text-orange-400/70">{t.role}</p>
+                  </div>
+                </div>
+              </div>
+            );
+          })()}
+        </div>
+      </section>
+
+      {/* ── Pricing ──────────────────────────────────────────────────────────── */}
+      <section id="pricing" className="py-20 px-6">
+        <div className="mx-auto max-w-6xl">
+          <div className="mb-14 text-center">
+            <span className="inline-block rounded-full border border-orange-500/30 bg-orange-500/10 px-3.5 py-1 text-xs font-semibold text-orange-400 mb-4">
+              India-first pricing
+            </span>
+            <h2 className="font-display text-4xl font-extrabold text-white md:text-5xl">
+              Priced for Bharat.
+            </h2>
+            <p className="mt-4 text-white/45 text-lg">All plans include TRAI compliance + Exotel India telephony.</p>
           </div>
 
           <div className="grid gap-6 md:grid-cols-3">
@@ -629,45 +717,40 @@ function LandingPage() {
               <div
                 key={plan.name}
                 className={cn(
-                  "relative rounded-2xl border p-8 transition-all",
+                  "relative rounded-2xl border p-7 flex flex-col",
                   plan.highlight
-                    ? "border-violet-500/50 bg-gradient-to-b from-violet-500/15 to-violet-500/5 shadow-2xl shadow-violet-500/20 scale-[1.02]"
-                    : "border-white/10 bg-white/[0.03] hover:border-white/20"
+                    ? "border-orange-500/50 bg-gradient-to-b from-orange-500/10 to-transparent shadow-xl shadow-orange-500/10"
+                    : "border-white/10 bg-white/3"
                 )}
               >
                 {plan.badge && (
-                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
-                    <span className="rounded-full bg-violet-500 px-4 py-1 text-xs font-bold text-white shadow-lg">
-                      {plan.badge}
-                    </span>
-                  </div>
+                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-orange-500 px-3.5 py-1 text-[11px] font-bold text-white shadow-lg">
+                    {plan.badge}
+                  </span>
                 )}
-
                 <div className="mb-6">
-                  <p className="text-sm font-semibold text-white/50 uppercase tracking-wider mb-1">{plan.name}</p>
+                  <h3 className="text-sm font-bold text-white/50 uppercase tracking-widest mb-1">{plan.name}</h3>
                   <div className="flex items-baseline gap-1">
-                    <span className="font-display text-4xl font-black text-white">{plan.price}</span>
-                    {plan.period && <span className="text-sm text-white/40">{plan.period}</span>}
+                    <span className="font-display text-4xl font-extrabold text-white">{plan.price}</span>
+                    <span className="text-white/40">{plan.period}</span>
                   </div>
-                  <p className="mt-2 text-sm text-white/45">{plan.desc}</p>
+                  <p className="mt-2 text-sm text-white/40">{plan.desc}</p>
                 </div>
-
-                <ul className="mb-8 space-y-3">
-                  {plan.features.map((feat) => (
-                    <li key={feat} className="flex items-center gap-2.5 text-sm text-white/70">
-                      <CheckCircle2 className={cn("size-4 shrink-0", plan.highlight ? "text-violet-400" : "text-white/30")} />
-                      {feat}
+                <ul className="flex-1 space-y-3 mb-8">
+                  {plan.features.map((f) => (
+                    <li key={f} className="flex items-center gap-2.5 text-sm text-white/70">
+                      <CheckCircle2 className="size-4 shrink-0 text-emerald-400" />
+                      {f}
                     </li>
                   ))}
                 </ul>
-
                 <Link
                   to="/login"
                   className={cn(
-                    "block w-full rounded-xl py-3 text-center text-sm font-bold transition-all hover:scale-105 active:scale-100",
+                    "block rounded-xl py-2.5 text-center text-sm font-bold transition-all hover:scale-105",
                     plan.highlight
-                      ? "bg-violet-500 text-white shadow-lg shadow-violet-500/30 hover:bg-violet-400"
-                      : "border border-white/10 bg-white/5 text-white/80 hover:border-white/20 hover:bg-white/10 hover:text-white"
+                      ? "bg-orange-500 text-white shadow-lg shadow-orange-500/30 hover:bg-orange-400"
+                      : "border border-white/15 text-white/70 hover:border-white/30 hover:text-white"
                   )}
                 >
                   {plan.cta}
@@ -678,84 +761,43 @@ function LandingPage() {
         </div>
       </section>
 
-      {/* ── CTA ──────────────────────────────────────────────────────────────── */}
+      {/* ── Final CTA ────────────────────────────────────────────────────────── */}
       <section className="py-20 px-6">
-        <div className="mx-auto max-w-5xl">
-          <div className="relative overflow-hidden rounded-3xl border border-violet-500/30 bg-gradient-to-br from-violet-600/20 via-purple-600/15 to-blue-600/10 p-12 md:p-16 text-center">
-            <div className="pointer-events-none absolute inset-0">
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 size-80 rounded-full bg-violet-500/20 blur-3xl" />
-            </div>
-
-            <div className="relative">
-              <Sparkles className="mx-auto mb-6 size-10 text-violet-400" />
-              <h2 className="font-display text-4xl font-extrabold text-white md:text-5xl mb-4">
-                Ready to 10× your outbound?
-              </h2>
-              <p className="mb-8 text-lg text-white/50 max-w-xl mx-auto">
-                Join 1,200+ sales teams running autonomous AI voice outbound. First 14 days free.
-              </p>
-              <div className="flex flex-wrap gap-4 justify-center">
-                <Link
-                  to="/login"
-                  className="inline-flex items-center gap-2 rounded-2xl bg-violet-600 px-8 py-4 text-base font-bold text-white shadow-xl shadow-violet-500/30 transition-all hover:bg-violet-500 hover:shadow-violet-500/40 hover:scale-105"
-                >
-                  Start free trial <ArrowRight className="size-4" />
-                </Link>
-                <button type="button" className="inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-8 py-4 text-base font-semibold text-white/70 transition-all hover:border-white/20 hover:bg-white/10 hover:text-white">
-                  <CalendarCheck className="size-4" /> Book a live demo
-                </button>
-              </div>
-              <div className="mt-8 flex flex-wrap items-center justify-center gap-6 text-sm text-white/30">
-                <span className="flex items-center gap-2"><ShieldCheck className="size-4 text-emerald-400" /> SOC-2 Type II</span>
-                <span className="flex items-center gap-2"><Lock className="size-4 text-white/30" /> 256-bit TLS</span>
-                <span className="flex items-center gap-2"><Award className="size-4 text-amber-400" /> G2 Leader 2024</span>
-                <span className="flex items-center gap-2"><Clock className="size-4 text-white/30" /> 99.97% Uptime SLA</span>
-              </div>
-            </div>
+        <div className="mx-auto max-w-3xl text-center">
+          <div className="rounded-3xl border border-orange-500/20 bg-gradient-to-b from-orange-500/10 to-transparent p-12 md:p-16">
+            <span className="text-4xl mb-4 block">🇮🇳</span>
+            <h2 className="font-display text-4xl font-extrabold text-white md:text-5xl mb-4">
+              India ka AI Sales Platform.
+            </h2>
+            <p className="text-lg text-white/50 mb-8 max-w-xl mx-auto">
+              Deploy your first Hindi AI calling campaign in 30 minutes. No code, no credit card.
+            </p>
+            <Link
+              to="/login"
+              className="inline-flex items-center gap-2 rounded-2xl bg-orange-500 px-8 py-4 text-base font-bold text-white shadow-xl shadow-orange-500/30 transition-all hover:bg-orange-400 hover:scale-105"
+            >
+              अभी शुरू करें — Free <ArrowRight className="size-4" />
+            </Link>
           </div>
         </div>
       </section>
 
       {/* ── Footer ───────────────────────────────────────────────────────────── */}
-      <footer className="border-t border-white/5 py-12 px-6">
-        <div className="mx-auto max-w-7xl">
-          <div className="grid gap-8 md:grid-cols-4 mb-10">
-            <div>
-              <div className="flex items-center gap-2.5 mb-4">
-                <span className="flex size-7 items-center justify-center rounded-lg bg-violet-600">
-                  <Waves className="size-3.5 text-white" />
-                </span>
-                <span className="font-display text-sm font-bold text-white">VoxSales AI</span>
-              </div>
-              <p className="text-xs text-white/35 leading-relaxed max-w-xs">
-                The autonomous AI voice sales platform trusted by 1,200+ teams worldwide.
-              </p>
-            </div>
-            {[
-              { heading: "Product", links: ["Features", "Pricing", "Changelog", "Roadmap"] },
-              { heading: "Company", links: ["About", "Blog", "Careers", "Press"] },
-              { heading: "Legal", links: ["Privacy", "Terms", "Security", "DNC Compliance"] },
-            ].map((col) => (
-              <div key={col.heading}>
-                <p className="mb-3 text-xs font-semibold text-white/40 uppercase tracking-widest">{col.heading}</p>
-                <ul className="space-y-2">
-                  {col.links.map((link) => (
-                    <li key={link}>
-                      <a href="#" className="text-sm text-white/35 hover:text-white/70 transition-colors">{link}</a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+      <footer className="border-t border-white/5 py-10 px-6">
+        <div className="mx-auto max-w-7xl flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-2.5">
+            <span className="flex size-7 items-center justify-center rounded-lg bg-orange-600">
+              <Waves className="size-3.5 text-white" />
+            </span>
+            <span className="font-display text-sm font-bold text-white">Indianvoice<span className="text-orange-400">.ai</span></span>
           </div>
-
-          <div className="border-t border-white/5 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-xs text-white/25">© 2025 VoxSales AI Inc. All rights reserved.</p>
-            <div className="flex items-center gap-4 text-xs text-white/25">
-              <a href="#" className="hover:text-white/50 transition-colors">Privacy Policy</a>
-              <a href="#" className="hover:text-white/50 transition-colors">Terms of Service</a>
-              <a href="#" className="hover:text-white/50 transition-colors">Cookie Policy</a>
-            </div>
+          <p className="text-xs text-white/25">
+            © {new Date().getFullYear()} Indianvoice.ai. Built for Bharat. TRAI compliant. Powered by Sarvam AI + Exotel.
+          </p>
+          <div className="flex gap-4">
+            {["Privacy", "Terms", "Contact"].map((link) => (
+              <a key={link} href="#" className="text-xs text-white/30 hover:text-white transition-colors">{link}</a>
+            ))}
           </div>
         </div>
       </footer>

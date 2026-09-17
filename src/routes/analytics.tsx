@@ -34,7 +34,7 @@ import { analyticsApi } from "@/lib/api";
 export const Route = createFileRoute("/analytics")({
   head: () => ({
     meta: [
-      { title: "Analytics — VoxSales AI" },
+      { title: "Analytics — Indianvoice.ai" },
       {
         name: "description",
         content:

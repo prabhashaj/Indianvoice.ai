@@ -22,7 +22,7 @@ import { toast } from "sonner";
 export const Route = createFileRoute("/campaigns/$campaignId")({
   head: () => ({
     meta: [
-      { title: "Campaign detail — VoxSales AI" },
+      { title: "Campaign detail — Indianvoice.ai" },
       {
         name: "description",
         content: "Campaign performance, lead funnel, calling schedule and assigned agent.",

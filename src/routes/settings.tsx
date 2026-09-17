@@ -15,7 +15,7 @@ import { toast } from "sonner";
 export const Route = createFileRoute("/settings")({
   head: () => ({
     meta: [
-      { title: "Settings — VoxSales AI" },
+      { title: "Settings — Indianvoice.ai" },
       {
         name: "description",
         content: "Manage workspace settings, team members, API integrations and voice configuration.",

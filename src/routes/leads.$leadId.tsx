@@ -28,7 +28,7 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/leads/$leadId")({
   head: () => ({
     meta: [
-      { title: "Lead profile — VoxSales AI" },
+      { title: "Lead profile — Indianvoice.ai" },
       {
         name: "description",
         content: "View intent score, call history, pain points and qualification status for this lead.",

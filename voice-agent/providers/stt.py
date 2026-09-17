@@ -1,5 +1,5 @@
 """
-VoxSales AI — STT Provider Adapter
+Indianvoice.ai — STT Provider Adapter
 Provider-agnostic speech-to-text with Deepgram as default.
 """
 import logging

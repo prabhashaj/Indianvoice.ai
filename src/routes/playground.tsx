@@ -11,7 +11,7 @@ import { toast } from "sonner";
 export const Route = createFileRoute("/playground")({
   head: () => ({
     meta: [
-      { title: "Voice Playground — VoxSales AI" },
+      { title: "Voice Playground — Indianvoice.ai" },
       { name: "description", content: "Talk directly to your AI sales agent using your microphone." },
     ],
   }),

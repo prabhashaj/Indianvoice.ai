@@ -21,21 +21,24 @@ import { toast } from "sonner";
 export const Route = createFileRoute("/agents/new")({
   head: () => ({
     meta: [
-      { title: "New AI agent — VoxSales AI" },
-      { name: "description", content: "Create a new AI voice sales representative." },
+      { title: "New AI Agent — Indianvoice.ai" },
+      { name: "description", content: "Create a new AI voice sales representative for Hindi, Telugu or English." },
     ],
   }),
   component: NewAgent,
 });
 
 const VOICE_OPTIONS = [
-  { id: "nova-us-male", name: "Nova — Confident US Male", provider: "Cartesia" },
-  { id: "meera-in-female", name: "Meera — Warm IN Female", provider: "Cartesia" },
-  { id: "atlas-us-male", name: "Atlas — Calm US Male", provider: "Cartesia" },
-  { id: "lyra-us-female", name: "Lyra — Soft US Female", provider: "Cartesia" },
-  { id: "orion-in-male", name: "Orion — Bright IN Male", provider: "Cartesia" },
-  { id: "stella-uk-female", name: "Stella — Crisp UK Female", provider: "ElevenLabs" },
-  { id: "james-au-male", name: "James — Friendly AU Male", provider: "ElevenLabs" },
+  // Indian voices (Sarvam AI)
+  { id: "priya", name: "Priya — Hindi Female (Sarvam AI)", provider: "Sarvam AI", lang: "Hindi" },
+  { id: "arjun", name: "Arjun — Hindi Male (Sarvam AI)", provider: "Sarvam AI", lang: "Hindi" },
+  { id: "ananya", name: "Ananya — Telugu Female (Sarvam AI)", provider: "Sarvam AI", lang: "Telugu" },
+  { id: "krishna", name: "Krishna — Telugu Male (Sarvam AI)", provider: "Sarvam AI", lang: "Telugu" },
+  { id: "kavya", name: "Kavya — Indian English Female (Sarvam AI)", provider: "Sarvam AI", lang: "English" },
+  { id: "aarav", name: "Aarav — Indian English Male (Sarvam AI)", provider: "Sarvam AI", lang: "English" },
+  // Fallback voices (ElevenLabs/Cartesia)
+  { id: "meera", name: "Meera — Warm Female (ElevenLabs)", provider: "ElevenLabs", lang: "Any" },
+  { id: "atlas", name: "Atlas — Calm Male (Cartesia)", provider: "Cartesia", lang: "Any" },
 ];
 
 const INDUSTRIES = [
@@ -51,7 +54,17 @@ const INDUSTRIES = [
   "Other",
 ];
 
-const LANGUAGES = ["English", "Hindi", "Spanish", "French", "Arabic", "Japanese", "Portuguese"];
+const LANGUAGES = [
+  { value: "hindi", label: "हिंदी (Hindi)", flag: "🇮🇳" },
+  { value: "english", label: "English (India)", flag: "🇮🇳" },
+  { value: "telugu", label: "తెలుగు (Telugu)", flag: "🇮🇳" },
+  { value: "hinglish", label: "Hinglish (Hindi + English)", flag: "🇮🇳" },
+  { value: "tamil", label: "தமிழ் (Tamil)", flag: "🇮🇳" },
+  { value: "kannada", label: "ಕನ್ನಡ (Kannada)", flag: "🇮🇳" },
+  { value: "bengali", label: "বাংলা (Bengali)", flag: "🇮🇳" },
+  { value: "marathi", label: "मराठी (Marathi)", flag: "🇮🇳" },
+  { value: "gujarati", label: "ગુજરાતી (Gujarati)", flag: "🇮🇳" },
+];
 
 const TONES = [
   "Professional, consultative",

@@ -10,13 +10,13 @@ import { toast } from "sonner";
 export const Route = createFileRoute("/agents/")(({
   head: () => ({
     meta: [
-      { title: "AI Voice Agents — VoxSales AI" },
+      { title: "AI Voice Agents — Indianvoice.ai" },
       {
         name: "description",
         content:
           "Create, configure and monitor AI voice sales agents: voice, language, objective, tone and live conversion performance.",
       },
-      { property: "og:title", content: "AI Voice Agents — VoxSales AI" },
+      { property: "og:title", content: "AI Voice Agents — Indianvoice.ai" },
       {
         property: "og:description",
         content: "Your roster of AI sales reps, each with its own voice, script strategy and results.",

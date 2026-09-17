@@ -32,7 +32,7 @@ import { analyticsApi, leadsApi, callsApi, agentsApi } from "@/lib/api";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Dashboard — VoxSales AI Voice Sales Command Center" },
+      { title: "Dashboard — Indianvoice.ai Voice Sales Command Center" },
       {
         name: "description",
         content:

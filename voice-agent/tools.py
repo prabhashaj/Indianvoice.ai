@@ -1,5 +1,5 @@
 """
-VoxSales AI — Agent Tools
+Indianvoice.ai — Agent Tools
 Tools that the AI agent can invoke during a call to interact with the backend API.
 All tools post to the VoxSales backend via authenticated HTTP.
 """

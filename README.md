@@ -1,81 +1,181 @@
-# Indianvoice.ai - Sales AI Command Center
+# Indianvoice.ai — India's #1 AI Voice Sales Platform
 
-The **Sales AI Command Center** is a comprehensive platform for managing and deploying AI-powered voice agents for sales and customer interactions. It features a full-stack architecture with a modern web dashboard, a robust backend API, and a real-time voice agent service.
+> 🇮🇳 **Built for Bharat. Speaks Hindi. Speaks Telugu. Speaks English.**
+> TRAI-compliant outbound AI calling at ₹0.30/min via Exotel.
 
-## Project Structure
+---
+
+## What is Indianvoice.ai?
+
+**Indianvoice.ai** is an open-source, no-code AI voice sales platform that lets any Indian business deploy AI calling agents in **Hindi, Telugu, and English** — without writing a single line of code.
+
+Think of it as an Indian-built alternative to [Vapi.ai](https://vapi.ai), but built specifically for the Indian market with:
+
+| Feature | Vapi.ai | Indianvoice.ai |
+|---------|---------|----------------|
+| Hindi STT/TTS | ❌ Poor | ✅ Native (Sarvam AI) |
+| Telugu support | ❌ None | ✅ Native (Sarvam AI) |
+| Indian telephony | ❌ US-routed | ✅ Exotel (₹0.30/min) |
+| TRAI compliance | ❌ None | ✅ Full NDNC + window |
+| Hinglish support | ❌ None | ✅ Code-switch aware |
+| WhatsApp follow-up | ❌ None | ✅ Built-in |
+| Pricing | $0.05+/min (~₹4+) | ₹0.30/min |
+
+---
+
+## Architecture
 
 This repository is organized into three main components:
 
-1. **Frontend** (Root directory)
-2. **Backend API** (`/backend`)
-3. **Voice Agent** (`/voice-agent`)
+```
+Sales AI Command Center/
+├── src/                  # Frontend — TanStack Start + React dashboard
+├── backend/              # FastAPI REST API
+└── voice-agent/          # Python LiveKit voice agent (STT→LLM→TTS pipeline)
+```
 
-### Frontend (Dashboard)
-A modern, responsive web application built to manage campaigns, leads, calls, and agent configurations.
+---
 
-**Tech Stack:**
-- **Framework:** TanStack Start & React
-- **Styling:** Tailwind CSS & Radix UI primitives
-- **Routing:** TanStack Router
+## Frontend (No-Code Dashboard)
 
-**Getting Started:**
+A modern React dashboard to manage campaigns, leads, calls, agents — all without code.
+
+**Tech Stack:** TanStack Start, React, Tailwind CSS, Radix UI
+
 ```sh
 # Install dependencies
 npm install
 
-# Start the development server
+# Start the development server (http://localhost:8080)
 npm run dev
 ```
 
-### Backend API (`/backend`)
-A high-performance REST API that handles data persistence, business logic, authentication, and webhooks for telephony providers (e.g., Twilio, Telnyx).
+---
 
-**Tech Stack:**
-- **Framework:** FastAPI
-- **Database:** SQLAlchemy, asyncpg (PostgreSQL), Alembic (Migrations)
-- **Background Tasks:** Redis & ARQ
+## Backend API (`/backend`)
 
-**Getting Started:**
+High-performance FastAPI backend with Exotel telephony, TRAI compliance, and Indian language routing.
+
+**Tech Stack:** FastAPI, SQLAlchemy, Exotel, LiveKit, Sarvam AI
+
 ```sh
 cd backend
 
-# Create and activate a virtual environment
+# Setup virtual environment
 python -m venv venv
-source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+venv\Scripts\activate  # Windows
 
 # Install dependencies
 pip install -r requirements.txt
 
-# Start the API server
-uvicorn app.main:app --reload
+# Run dev server
+uvicorn app.main:app --reload --port 8000
 ```
 
-### Voice Agent (`/voice-agent`)
-Real-time conversational AI agents powered by LiveKit, enabling low-latency voice interactions with users.
+**Key environment variables:**
 
-**Tech Stack:**
-- **Framework:** LiveKit Agents
-- **STT/TTS/LLM:** Deepgram, Cartesia, ElevenLabs, Mistral (via OpenAI API)
+```env
+# Indian Telephony (Exotel)
+EXOTEL_SID=your_sid
+EXOTEL_API_KEY=your_key
+EXOTEL_API_TOKEN=your_token
+EXOTEL_CALLER_ID=+91XXXXXXXXXX
 
-**Getting Started:**
+# Indian Language AI (Sarvam AI)
+SARVAM_API_KEY=your_sarvam_key
+
+# LLM
+MISTRAL_API_KEY=your_mistral_key
+
+# Voice (fallback)
+ELEVENLABS_API_KEY=your_el_key
+
+# LiveKit (audio infrastructure)
+LIVEKIT_URL=wss://...
+LIVEKIT_API_KEY=...
+LIVEKIT_API_SECRET=...
+```
+
+---
+
+## Voice Agent (`/voice-agent`)
+
+Real-time AI voice agent supporting Hindi/Telugu/English via LiveKit.
+
+**Tech Stack:** Python, LiveKit Agents, Sarvam AI (STT/TTS), Mistral (LLM), Deepgram
+
+**Supported Languages:**
+- 🇮🇳 **Hindi** — Sarvam AI `saarika:v2` STT + `bulbul:v1` TTS
+- 🇮🇳 **Telugu** — Sarvam AI native Telugu model
+- 🇮🇳 **Hinglish** — Code-switch aware Hindi+English
+- 🇮🇳 **English (India)** — Deepgram Nova-2 (en-IN)
+
 ```sh
 cd voice-agent
 
-# Create and activate a virtual environment
+# Setup virtual environment
 python -m venv venv
-source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+venv\Scripts\activate  # Windows
 
 # Install dependencies
 pip install -r requirements.txt
 
-# Run the agent
+# Dev mode (auto-joins first room)
+python agent.py dev
+
+# Production mode
 python agent.py start
 ```
 
-## Environment Variables
+**Key environment variables:**
 
-Each component requires its own set of environment variables. Reference the `.env.example` files in the respective directories, create local `.env` files, and populate them with your API keys (e.g., LiveKit, LLM providers, Twilio, database credentials).
+```env
+LIVEKIT_URL=wss://...
+LIVEKIT_API_KEY=...
+LIVEKIT_API_SECRET=...
+SARVAM_API_KEY=...
+MISTRAL_API_KEY=...
+DEEPGRAM_API_KEY=...
+ELEVENLABS_API_KEY=...
+```
+
+---
+
+## TRAI Compliance
+
+All outbound calls automatically enforce:
+
+- ✅ **NDNC/DND scrubbing** before every call
+- ✅ **9AM–9PM IST** calling window enforcement
+- ✅ **Max 3 calls/week** per number (TRAI mandate)
+- ✅ **One-click opt-out** management
+- ✅ **DPDP Act 2023** data handling
+
+---
+
+## Indian Telephony (Exotel)
+
+Outbound calls route via **Exotel** for Indian numbers (+91):
+- Direct Jio/Airtel/BSNL/Vi PSTN routing
+- ₹0.30–0.50/min (vs Twilio's ₹4+/min)
+- Indian caller IDs
+- Local latency (<200ms vs 600ms for US-routed)
+
+---
 
 ## Deployment
 
-A `docker-compose.yml` is provided at the root for orchestrated multi-container deployment, allowing you to easily spin up the frontend, backend, voice-agent, and required infrastructure (like Redis or PostgreSQL) simultaneously.
+A `docker-compose.yml` is included for full multi-container deployment.
+
+```sh
+docker-compose up --build
+```
+
+---
+
+## Made with ❤️ for Bharat
+
+- **STT/TTS:** [Sarvam AI](https://sarvam.ai) (Indian language AI)
+- **Voice infra:** [LiveKit](https://livekit.io)
+- **Telephony:** [Exotel](https://exotel.com)
+- **LLM:** [Mistral AI](https://mistral.ai)

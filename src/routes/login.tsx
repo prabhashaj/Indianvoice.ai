@@ -19,7 +19,7 @@ import { toast } from "sonner";
 
 export const Route = createFileRoute("/login")({
   head: () => ({
-    meta: [{ title: "Sign in — VoxSales AI Sales Command Center" }],
+    meta: [{ title: "Sign in — Indianvoice.ai Sales Command Center" }],
   }),
   component: LoginPage,
 });
@@ -76,7 +76,7 @@ function LoginPage() {
         workspace_name: regWorkspace.trim() || `${regName.split(" ")[0]}'s Workspace`,
       });
       setTokens(data.access_token, data.refresh_token);
-      toast.success("Account created! Welcome to VoxSales AI.");
+      toast.success("Account created! Welcome to Indianvoice.ai.");
       navigate({ to: "/" });
     } catch (err: any) {
       setRegError(err.message ?? "Registration failed. Please try again.");
@@ -108,7 +108,7 @@ function LoginPage() {
               <Waves className="size-4 text-white" />
             </span>
             <div>
-              <p className="font-display text-base font-bold text-white">VoxSales AI</p>
+              <p className="font-display text-base font-bold text-white">Indianvoice.ai</p>
               <p className="text-[10px] text-white/40 uppercase tracking-widest font-medium">Sales Command Center</p>
             </div>
           </Link>
@@ -161,7 +161,7 @@ function LoginPage() {
           <div className="relative flex items-center gap-6 text-[11px] text-white/25 pt-4 border-t border-white/5">
             <span className="flex items-center gap-1.5"><ShieldCheck className="size-3.5 text-emerald-400/70" /> SOC-2 Type II</span>
             <span className="flex items-center gap-1.5"><Lock className="size-3 text-white/30" /> 256-bit TLS</span>
-            <span className="ml-auto">© 2025 VoxSales AI Inc.</span>
+            <span className="ml-auto">© 2025 Indianvoice.ai Inc.</span>
           </div>
         </div>
       </div>
@@ -173,7 +173,7 @@ function LoginPage() {
           <span className="flex size-8 items-center justify-center rounded-xl bg-violet-600">
             <Waves className="size-4 text-white" />
           </span>
-          <span className="font-display text-base font-bold text-white">VoxSales AI</span>
+          <span className="font-display text-base font-bold text-white">Indianvoice.ai</span>
         </div>
 
         <div className="w-full max-w-md">

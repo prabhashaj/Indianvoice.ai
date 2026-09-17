@@ -1,5 +1,5 @@
 """
-VoxSales AI — Conversation States
+Indianvoice.ai — Conversation States
 Defines the explicit state enum for the sales agent conversation flow.
 """
 from enum import Enum, auto

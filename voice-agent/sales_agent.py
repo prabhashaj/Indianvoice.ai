@@ -1,5 +1,5 @@
 """
-VoxSales AI — Sales Agent State Machine
+Indianvoice.ai — Sales Agent State Machine
 Implements the structured sales conversation flow using an explicit state machine.
 The LLM provides conversational intelligence within each state while the state machine
 controls valid transitions and business rules.

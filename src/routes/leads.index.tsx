@@ -43,7 +43,7 @@ import { toast } from "sonner";
 export const Route = createFileRoute("/leads/")({
   head: () => ({
     meta: [
-      { title: "Leads CRM — VoxSales AI" },
+      { title: "Leads CRM — Indianvoice.ai" },
       {
         name: "description",
         content:

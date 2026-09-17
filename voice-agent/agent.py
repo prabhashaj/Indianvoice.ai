@@ -1,5 +1,5 @@
 """
-VoxSales AI — Voice Agent Entry Point (livekit-agents 1.x API)
+Indianvoice.ai — Voice Agent Entry Point (livekit-agents 1.x API)
 Connects to LiveKit and runs the sales agent using Mistral as the LLM.
 
 Usage:
@@ -257,6 +257,6 @@ if __name__ == "__main__":
     cli.run_app(
         WorkerOptions(
             entrypoint_fnc=entrypoint,
-            agent_name="voxsales-agent",
+            agent_name="indianvoice-agent",
         )
     )

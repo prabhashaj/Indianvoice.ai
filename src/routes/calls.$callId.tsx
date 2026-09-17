@@ -23,7 +23,7 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/calls/$callId")({
   head: () => ({
     meta: [
-      { title: "Call detail — VoxSales AI" },
+      { title: "Call detail — Indianvoice.ai" },
       {
         name: "description",
         content: "Full call transcript, AI analysis, intent score, sentiment and structured conversation intelligence.",

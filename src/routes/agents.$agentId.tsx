@@ -19,7 +19,7 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/agents/$agentId")({
   head: () => ({
     meta: [
-      { title: "Agent configuration — VoxSales AI" },
+      { title: "Agent configuration — Indianvoice.ai" },
       {
         name: "description",
         content:

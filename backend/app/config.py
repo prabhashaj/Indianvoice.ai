@@ -15,7 +15,7 @@ class Settings(BaseSettings):
 
     # ── App ──────────────────────────────────────────────────────────────────
     app_env: Literal["development", "staging", "production"] = "development"
-    app_name: str = "VoxSales AI"
+    app_name: str = "Indianvoice.ai"
     app_port: int = 8000
     frontend_url: str = "http://localhost:5173"
 
@@ -43,13 +43,20 @@ class Settings(BaseSettings):
     mistral_temperature: float = 0.7
     mistral_max_tokens: int = 512
 
+    # ── Indian Language ───────────────────────────────────────────────────────
+    default_language: str = "hindi"           # hindi / english / telugu / hinglish
+    allow_code_switching: bool = True         # Allow Hinglish code-switching
+
+    # ── Sarvam AI (Indian STT/TTS) ────────────────────────────────────────────
+    sarvam_api_key: str = ""                  # Get from https://dashboard.sarvam.ai
+
     # ── STT ──────────────────────────────────────────────────────────────────
-    stt_provider: str = "deepgram"
+    stt_provider: str = "sarvam"              # sarvam / deepgram
     deepgram_api_key: str = ""
     deepgram_model: str = "nova-2"
 
     # ── TTS ──────────────────────────────────────────────────────────────────
-    tts_provider: str = "cartesia"
+    tts_provider: str = "sarvam"              # sarvam / elevenlabs / cartesia
     elevenlabs_api_key: str = ""
     cartesia_api_key: str = ""
     playht_api_key: str = ""
@@ -61,17 +68,26 @@ class Settings(BaseSettings):
     n8n_api_key: str = ""
 
     # ── Telephony ─────────────────────────────────────────────────────────────
-    telephony_provider: str = "livekit"
-    # LiveKit native telephony (primary)
-    livekit_phone_number: str = "+12402124041"  # purchased LiveKit number
-    livekit_outbound_trunk_id: str = ""          # set after first call or manually
-    livekit_sip_trunk_id: str = ""               # inbound trunk ID from dashboard
+    telephony_provider: str = "exotel"        # exotel (India default) / livekit / twilio / telnyx
+
+    # ── Exotel (Indian PSTN — primary for +91 numbers) ────────────────────────
+    exotel_sid: str = ""                      # Account SID from Exotel dashboard
+    exotel_api_key: str = ""                  # API Key
+    exotel_api_token: str = ""               # API Token
+    exotel_subdomain: str = "api.exotel.com"  # e.g. yourcompany.api.exotel.com
+    exotel_caller_id: str = ""               # +91XXXXXXXXXX — verified Exotel number
+
+    # ── LiveKit native telephony (fallback / international) ───────────────────
+    livekit_phone_number: str = ""
+    livekit_outbound_trunk_id: str = ""
+    livekit_sip_trunk_id: str = ""
     livekit_sip_dispatch_rule_id: str = ""
-    livekit_sip_ingest_host: str = ""            # e.g. 25cwl59egvk.sip.livekit.cloud
-    # Twilio (kept for inbound-only fallback / legacy)
+    livekit_sip_ingest_host: str = ""
+
+    # ── Twilio (legacy fallback for non-Indian numbers) ───────────────────────
     twilio_account_sid: str = ""
     twilio_auth_token: str = ""
-    twilio_phone_number: str = "+17372508034"
+    twilio_phone_number: str = ""
     twilio_twiml_url: str = ""
 
     # ── Telnyx ────────────────────────────────────────────────────────────────
@@ -80,6 +96,12 @@ class Settings(BaseSettings):
     telnyx_connection_id: str = "3050814462702389156"  # VoxSales AI Call Control App
 
     public_webhook_url: str = ""
+
+    # ── TRAI Compliance ────────────────────────────────────────────────────────
+    trai_compliance_enabled: bool = True
+    trai_calling_window_start: int = 9    # 9 AM IST
+    trai_calling_window_end: int = 21     # 9 PM IST
+    trai_max_calls_per_week: int = 3      # Per number, per TRAI guidelines
 
     # ── Campaign Execution ────────────────────────────────────────────────────
     max_concurrent_calls: int = 3

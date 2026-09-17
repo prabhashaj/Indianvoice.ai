@@ -13,7 +13,7 @@ import { useState } from "react";
 export const Route = createFileRoute("/follow-ups")({
   head: () => ({
     meta: [
-      { title: "Follow-ups — VoxSales AI" },
+      { title: "Follow-ups — Indianvoice.ai" },
       {
         name: "description",
         content: "Work your follow-up queue: complete, reschedule or call back high-intent leads.",

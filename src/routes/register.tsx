@@ -17,7 +17,7 @@ import { toast } from "sonner";
 
 export const Route = createFileRoute("/register")({
   head: () => ({
-    meta: [{ title: "Create Workspace — VoxSales AI Sales Command Center" }],
+    meta: [{ title: "Create Workspace — Indianvoice.ai Sales Command Center" }],
   }),
   component: RegisterPage,
 });
@@ -91,12 +91,12 @@ function RegisterPage() {
         workspace_name: form.workspace_name || `${form.full_name.split(" ")[0]}'s Workspace`,
       });
       setTokens(data.access_token, data.refresh_token);
-      toast.success("Workspace created successfully! Welcome to VoxSales AI.");
+      toast.success("Workspace created successfully! Welcome to Indianvoice.ai.");
       navigate({ to: "/" });
     } catch (err: any) {
       // Graceful local demo creation if backend offline
       setTokens("mock_jwt_token_registered", "mock_refresh_token_registered");
-      toast.success("Workspace activated! Welcome to VoxSales AI.");
+      toast.success("Workspace activated! Welcome to Indianvoice.ai.");
       navigate({ to: "/" });
     } finally {
       setLoading(false);
@@ -131,7 +131,7 @@ function RegisterPage() {
             <Waves className="size-5 text-white" />
           </span>
           <div className="flex flex-col">
-            <span className="font-display text-lg font-bold text-white tracking-tight">VoxSales AI</span>
+            <span className="font-display text-lg font-bold text-white tracking-tight">Indianvoice.ai</span>
             <span className="text-[10px] font-semibold text-white/70 uppercase tracking-wider">Enterprise Outbound Platform</span>
           </div>
         </div>
