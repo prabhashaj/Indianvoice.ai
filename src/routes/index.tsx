@@ -32,11 +32,11 @@ import { analyticsApi, leadsApi, callsApi, agentsApi } from "@/lib/api";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Dashboard — Indianvoice.ai Voice Sales Command Center" },
+      { title: "Dashboard — Indianvoice.ai No-Code Voice Platform" },
       {
         name: "description",
         content:
-          "Live view of your AI voice sales team: calls in progress, connect rates, qualified leads and meetings booked today.",
+          "Live view of your automations: active conversations, connect rates, successful outcomes and actions executed.",
       },
     ],
   }),
@@ -46,12 +46,12 @@ export const Route = createFileRoute("/")({
 // ─── Colour maps ───────────────────────────────────────────────────────────────
 
 const FUNNEL_COLORS = [
-  "oklch(0.58 0.22 263)",
-  "oklch(0.56 0.22 228)",
-  "oklch(0.58 0.18 145)",
-  "oklch(0.67 0.19 84)",
-  "oklch(0.62 0.22 27)",
-  "oklch(0.55 0.25 10)",
+  "oklch(0.67 0.19 40)",
+  "oklch(0.65 0.18 50)",
+  "oklch(0.63 0.17 60)",
+  "oklch(0.60 0.16 70)",
+  "oklch(0.55 0.15 80)",
+  "oklch(0.50 0.12 100)",
 ];
 
 // ─── Chart Tooltip ─────────────────────────────────────────────────────────────
@@ -73,14 +73,14 @@ function ChartTooltip({ active, payload, label }: any) {
       <div className="space-y-1.5">
         <div className="flex items-center justify-between gap-4">
           <span className="flex items-center gap-1.5 text-muted-foreground">
-            <span className="size-2 rounded-full bg-[oklch(0.58_0.22_263)]" />
+            <span className="size-2 rounded-full bg-[oklch(0.67_0.19_40)]" />
             Dials
           </span>
           <span className="font-bold text-foreground tabular-nums">{dials.toLocaleString()}</span>
         </div>
         <div className="flex items-center justify-between gap-4">
           <span className="flex items-center gap-1.5 text-muted-foreground">
-            <span className="size-2 rounded-full bg-[oklch(0.62_0.19_145)]" />
+            <span className="size-2 rounded-full bg-[oklch(0.71_0.15_72)]" />
             Connected
           </span>
           <span className="font-bold text-foreground tabular-nums">{connected.toLocaleString()}</span>
@@ -205,16 +205,16 @@ function Dashboard() {
   return (
     <>
       <PageHeader
-        title="Sales command center"
-        subtitle={`${activeAgents} AI agent${activeAgents !== 1 ? "s" : ""} active · Live data`}
+        title="Automations Dashboard"
+        subtitle={`${activeAgents} Automations active · Live data`}
         actions={
           <>
             <Button variant="outline" asChild>
-              <Link to="/playground">Test a voice agent</Link>
+              <Link to="/playground">Test an automation</Link>
             </Button>
             <Button asChild>
               <Link to="/campaigns/new">
-                <Sparkles className="size-4" /> Launch campaign
+                <Sparkles className="size-4" /> New automation
               </Link>
             </Button>
           </>
@@ -224,7 +224,7 @@ function Dashboard() {
       {/* ── KPI strip */}
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         <StatCard
-          label="Total calls"
+          label="Total conversations"
           value={totalCalls.toLocaleString()}
           delta="Lifetime"
           trend="up"
@@ -238,14 +238,14 @@ function Dashboard() {
           icon={Phone}
         />
         <StatCard
-          label="Qualified leads"
+          label="Successful outcomes"
           value={qualifiedLeads.toString()}
           delta="In pipeline"
           trend="up"
           icon={Target}
         />
         <StatCard
-          label="Meetings booked"
+          label="Actions executed"
           value={totalMeetings.toString()}
           delta="Total"
           trend="up"
@@ -307,23 +307,23 @@ function Dashboard() {
                 <AreaChart data={chartData} margin={{ top: 16, right: 16, left: -4, bottom: 0 }}>
                   <defs>
                     <linearGradient id="g-dials" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stopColor="oklch(0.58 0.22 263)" stopOpacity={0.45} />
-                      <stop offset="100%" stopColor="oklch(0.58 0.22 263)" stopOpacity={0} />
+                      <stop offset="0%" stopColor="oklch(0.67 0.19 40)" stopOpacity={0.45} />
+                      <stop offset="100%" stopColor="oklch(0.67 0.19 40)" stopOpacity={0} />
                     </linearGradient>
                     <linearGradient id="g-conn" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stopColor="oklch(0.62 0.19 145)" stopOpacity={0.4} />
-                      <stop offset="100%" stopColor="oklch(0.62 0.19 145)" stopOpacity={0} />
+                      <stop offset="0%" stopColor="oklch(0.71 0.15 72)" stopOpacity={0.4} />
+                      <stop offset="100%" stopColor="oklch(0.71 0.15 72)" stopOpacity={0} />
                     </linearGradient>
                   </defs>
                   <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" vertical={false} strokeOpacity={0.6} />
                   <XAxis dataKey="day" stroke="var(--color-muted-foreground)" fontSize={11} tickLine={false} axisLine={false} dy={6} />
                   <YAxis stroke="var(--color-muted-foreground)" fontSize={11} tickLine={false} axisLine={false} width={38}
                     tickFormatter={(v) => (v >= 1000 ? `${(v / 1000).toFixed(1)}k` : v)} />
-                  <Tooltip content={<ChartTooltip />} cursor={{ stroke: "oklch(0.58 0.22 263)", strokeWidth: 1.5, strokeDasharray: "4 4" }} />
-                  <Area type="monotone" dataKey="calls" name="Dials" stroke="oklch(0.58 0.22 263)" strokeWidth={2.5}
-                    fill="url(#g-dials)" dot={false} activeDot={{ r: 5, strokeWidth: 2, stroke: "oklch(0.58 0.22 263)", fill: "var(--color-card)" }} />
-                  <Area type="monotone" dataKey="connected" name="Connected" stroke="oklch(0.62 0.19 145)" strokeWidth={2.5}
-                    fill="url(#g-conn)" dot={false} activeDot={{ r: 5, strokeWidth: 2, stroke: "oklch(0.62 0.19 145)", fill: "var(--color-card)" }} />
+                  <Tooltip content={<ChartTooltip />} cursor={{ stroke: "oklch(0.67 0.19 40)", strokeWidth: 1.5, strokeDasharray: "4 4" }} />
+                  <Area type="monotone" dataKey="calls" name="Dials" stroke="oklch(0.67 0.19 40)" strokeWidth={2.5}
+                    fill="url(#g-dials)" dot={false} activeDot={{ r: 5, strokeWidth: 2, stroke: "oklch(0.67 0.19 40)", fill: "var(--color-card)" }} />
+                  <Area type="monotone" dataKey="connected" name="Connected" stroke="oklch(0.71 0.15 72)" strokeWidth={2.5}
+                    fill="url(#g-conn)" dot={false} activeDot={{ r: 5, strokeWidth: 2, stroke: "oklch(0.71 0.15 72)", fill: "var(--color-card)" }} />
                 </AreaChart>
               </ResponsiveContainer>
             )}
@@ -331,8 +331,8 @@ function Dashboard() {
 
           <div className="flex items-center gap-5 border-t border-border px-5 py-3">
             {[
-              { label: "Dials", color: "oklch(0.58 0.22 263)" },
-              { label: "Connected", color: "oklch(0.62 0.19 145)" },
+              { label: "Dials", color: "oklch(0.67 0.19 40)" },
+              { label: "Connected", color: "oklch(0.71 0.15 72)" },
             ].map(({ label, color }) => (
               <span key={label} className="flex items-center gap-1.5 text-xs text-muted-foreground">
                 <span className="size-2.5 rounded-full" style={{ background: color }} />

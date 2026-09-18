@@ -87,9 +87,10 @@ function NewAgent() {
   const [tone, setTone] = useState("");
   const [languages, setLanguages] = useState<string[]>(["English"]);
   const [openingLine, setOpeningLine] = useState("");
-  const [qualifyCriteria, setQualifyCriteria] = useState(
-    "Qualified when the prospect confirms: (1) they own or influence the budget, (2) the pain is active today, (3) they agree to a demo within 14 days.",
-  );
+  const [skills, setSkills] = useState<string[]>([]);
+
+  const toggleSkill = (skill: string) =>
+    setSkills((prev) => (prev.includes(skill) ? prev.filter((s) => s !== skill) : [...prev, skill]));
 
   const createMutation = useMutation({
     mutationFn: () =>
@@ -102,7 +103,7 @@ function NewAgent() {
         objective: objective.trim(),
         tone,
         opening_script: openingLine.trim(),
-        qualification_criteria: qualifyCriteria.trim(),
+        qualification_criteria: skills.join(", "),
       }),
     onSuccess: (agent) => {
       queryClient.invalidateQueries({ queryKey: ["agents"] });
@@ -235,41 +236,63 @@ function NewAgent() {
           </div>
         </SectionCard>
 
-        <SectionCard title="Sales strategy" description="The agent's objective and conversation approach">
-          <div className="space-y-4">
+        <SectionCard title="Agent Skills & Actions" description="Capabilities and integrations this agent can execute">
+          <div className="space-y-6">
             <div>
-              <Label htmlFor="ag-objective">Objective</Label>
+              <Label htmlFor="ag-objective">Primary Goal / Objective</Label>
               <Input
                 id="ag-objective"
                 className="mt-1.5"
-                placeholder="e.g. Book qualified discovery calls"
+                placeholder="e.g. Help customers resolve technical issues"
                 value={objective}
                 onChange={(e) => setObjective(e.target.value)}
               />
             </div>
+            
+            <div>
+              <Label className="mb-2 block">Enabled Actions</Label>
+              <div className="grid gap-3 sm:grid-cols-2">
+                {[
+                  { id: "cal", label: "Schedule Meetings", icon: Sparkles, desc: "Connect Google Calendar" },
+                  { id: "email", label: "Send Follow-up Emails", icon: Plus, desc: "Connect Gmail / Outlook" },
+                  { id: "ticket", label: "Create Support Tickets", icon: ArrowLeft, desc: "Connect Zendesk" },
+                  { id: "webhook", label: "Custom Webhook", icon: Loader2, desc: "Trigger external APIs" },
+                ].map((s) => (
+                  <button
+                    key={s.id}
+                    type="button"
+                    onClick={() => toggleSkill(s.id)}
+                    className={`flex items-start gap-3 rounded-xl border p-3 text-left transition-all ${
+                      skills.includes(s.id)
+                        ? "border-orange-500 bg-orange-50/50 shadow-sm"
+                        : "border-border bg-card hover:border-orange-200"
+                    }`}
+                  >
+                    <div className={`mt-0.5 rounded-md p-1.5 ${skills.includes(s.id) ? "bg-orange-500 text-white" : "bg-neutral-soft text-muted-foreground"}`}>
+                      <s.icon className="size-4" />
+                    </div>
+                    <div>
+                      <span className={`block text-sm font-semibold ${skills.includes(s.id) ? "text-orange-900" : "text-foreground"}`}>{s.label}</span>
+                      <span className="block text-xs text-muted-foreground">{s.desc}</span>
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </div>
+
             <div>
               <Label htmlFor="ag-opening">Opening line template</Label>
               <Textarea
                 id="ag-opening"
                 className="mt-1.5"
                 rows={2}
-                placeholder={`Hi {{first_name}}, this is ${name || "Alex"} calling. I'll be quick — do you have thirty seconds?`}
+                placeholder={`Hi, this is ${name || "Alex"} from Support. How can I help you today?`}
                 value={openingLine}
                 onChange={(e) => setOpeningLine(e.target.value)}
               />
               <p className="mt-1 text-xs text-muted-foreground">
                 Use <code className="bg-neutral-soft px-1 py-0.5 rounded text-xs">{"{{first_name}}"}</code> as a variable.
               </p>
-            </div>
-            <div>
-              <Label htmlFor="ag-qualify">Qualification criteria</Label>
-              <Textarea
-                id="ag-qualify"
-                className="mt-1.5"
-                rows={3}
-                value={qualifyCriteria}
-                onChange={(e) => setQualifyCriteria(e.target.value)}
-              />
             </div>
           </div>
         </SectionCard>

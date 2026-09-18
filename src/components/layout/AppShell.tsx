@@ -35,11 +35,11 @@ import {
 const nav = [
   { to: "/", label: "Dashboard", icon: LayoutDashboard },
   { to: "/agents", label: "AI Agents", icon: CircuitBoard },
-  { to: "/campaigns", label: "Campaigns", icon: Activity },
-  { to: "/leads", label: "Leads CRM", icon: Users },
-  { to: "/calls", label: "Call Intelligence", icon: Phone },
-  { to: "/playground", label: "Voice Playground", icon: Mic },
-  { to: "/follow-ups", label: "Follow-ups", icon: CalendarCheck },
+  { to: "/campaigns", label: "Automations", icon: Activity },
+  { to: "/leads", label: "Contacts & CRM", icon: Users },
+  { to: "/calls", label: "Call Logs", icon: Phone },
+  { to: "/playground", label: "Playground", icon: Mic },
+  { to: "/follow-ups", label: "Actions & Tools", icon: CalendarCheck },
   { to: "/analytics", label: "Analytics", icon: BarChart3 },
   { to: "/settings", label: "Settings", icon: Settings },
 ] as const;
@@ -75,12 +75,12 @@ function SidebarBody({ pathname, onNavigate }: { pathname: string; onNavigate?: 
   return (
     <div className="flex h-full flex-col bg-sidebar text-sidebar-foreground">
       <div className="flex items-center gap-2.5 px-5 py-5">
-        <span className="grid size-9 place-items-center rounded-xl bg-ai text-ai-foreground shadow-raised">
+        <span className="grid size-9 place-items-center rounded-xl bg-gradient-to-br from-orange-500 to-amber-500 text-white shadow-md">
           <Waves className="size-5" aria-hidden />
         </span>
         <div className="leading-tight">
           <p className="font-display text-sm font-semibold">Indianvoice.ai</p>
-          <p className="text-xs text-sidebar-foreground/60">Autonomous sales calls</p>
+          <p className="text-xs text-sidebar-foreground/60">No-Code Voice Agents</p>
         </div>
       </div>
 
@@ -93,10 +93,10 @@ function SidebarBody({ pathname, onNavigate }: { pathname: string; onNavigate?: 
               to={item.to}
               onClick={onNavigate}
               className={cn(
-                "flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
+                "flex items-center gap-3 rounded-xl px-3 py-2 text-sm transition-colors",
                 active
-                  ? "bg-sidebar-accent text-sidebar-accent-foreground"
-                  : "text-sidebar-foreground/70 hover:bg-sidebar-accent/60 hover:text-sidebar-accent-foreground",
+                  ? "bg-orange-50 text-orange-600 font-bold"
+                  : "font-medium text-sidebar-foreground/70 hover:bg-orange-50/50 hover:text-orange-600",
               )}
             >
               <item.icon className="size-4" aria-hidden />
@@ -140,7 +140,7 @@ export function AppShell({ children }: { children: ReactNode }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-orange-50/40 via-background to-background">
       <aside className="fixed inset-y-0 left-0 hidden w-64 border-r border-sidebar-border lg:block">
         <SidebarBody pathname={pathname} />
       </aside>

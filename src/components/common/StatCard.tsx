@@ -16,19 +16,19 @@ export function StatCard({ label, value, delta, trend = "up", icon: Icon, hint, 
   return (
     <div
       className={cn(
-        "group rounded-xl border border-border bg-card p-4 shadow-card transition-all hover:border-ai/30 hover:shadow-raised",
+        "group rounded-2xl border border-border/60 bg-card p-4 shadow-sm transition-all hover:border-primary/30 hover:shadow-md",
         className,
       )}
     >
       <div className="flex items-start justify-between gap-3">
         <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">{label}</p>
         {Icon && (
-          <span className="grid size-8 place-items-center rounded-lg bg-surface-muted text-muted-foreground transition-colors group-hover:bg-ai-soft group-hover:text-ai">
+          <span className="grid size-8 place-items-center rounded-lg bg-primary/10 text-primary/70 transition-colors group-hover:bg-primary/20 group-hover:text-primary">
             <Icon className="size-4" aria-hidden />
           </span>
         )}
       </div>
-      <p className="num mt-3 text-2xl font-semibold text-foreground">{value}</p>
+      <p className="num mt-3 font-display text-2xl font-bold text-foreground">{value}</p>
       <div className="mt-1.5 flex items-center gap-2">
         {delta && (
           <span

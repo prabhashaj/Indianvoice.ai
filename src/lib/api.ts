@@ -105,7 +105,7 @@ const api = {
 // ─── Auth ─────────────────────────────────────────────────────────────────────
 
 export const authApi = {
-  register: (body: { full_name: string; email: string; password: string; workspace_name?: string }) =>
+  register: (body: { full_name: string; email: string; phone?: string; password: string; workspace_name?: string }) =>
     api.post<{ access_token: string; refresh_token: string }>("/auth/register", body),
   login: (email: string, password: string) =>
     api.post<{ access_token: string; refresh_token: string }>("/auth/login", { email, password }),

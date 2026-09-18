@@ -65,6 +65,7 @@ function RegisterPage() {
   const [form, setForm] = useState({
     full_name: "",
     email: "",
+    phone: "",
     password: "",
     workspace_name: "",
   });
@@ -87,6 +88,7 @@ function RegisterPage() {
       const data = await authApi.register({
         full_name: form.full_name,
         email: form.email,
+        phone: form.phone,
         password: form.password,
         workspace_name: form.workspace_name || `${form.full_name.split(" ")[0]}'s Workspace`,
       });
@@ -94,10 +96,14 @@ function RegisterPage() {
       toast.success("Workspace created successfully! Welcome to Indianvoice.ai.");
       navigate({ to: "/" });
     } catch (err: any) {
-      // Graceful local demo creation if backend offline
-      setTokens("mock_jwt_token_registered", "mock_refresh_token_registered");
-      toast.success("Workspace activated! Welcome to Indianvoice.ai.");
-      navigate({ to: "/" });
+      if (err.name === "TypeError" || err.message === "Failed to fetch") {
+        // Graceful local demo creation if backend offline
+        setTokens("mock_jwt_token_registered", "mock_refresh_token_registered");
+        toast.success("Workspace activated! (Offline Mode)");
+        navigate({ to: "/" });
+      } else {
+        setError(err.message ?? "Registration failed. Please try again.");
+      }
     } finally {
       setLoading(false);
     }
@@ -112,39 +118,42 @@ function RegisterPage() {
   }
 
   return (
-    <div className="flex min-h-screen bg-background text-foreground selection:bg-ai selection:text-ai-foreground">
+    <div className="flex min-h-screen bg-[#fffaf6] text-gray-900 selection:bg-orange-100 selection:text-orange-900">
       {/* ── Left: Benefits Panel ───────────────────────────────────────────── */}
-      <div className="relative hidden flex-col justify-between overflow-hidden bg-gradient-to-br from-indigo-950 via-ai to-violet-900 p-12 lg:flex lg:w-[46%]">
+      <div className="relative hidden flex-col justify-between overflow-hidden bg-white border-r border-orange-100 p-12 lg:flex lg:w-[46%]">
+        <div className="absolute inset-0 bg-gradient-to-br from-orange-50/50 via-white to-[#fffaf6]" />
         <div
-          className="pointer-events-none absolute inset-0 opacity-[0.08]"
+          className="pointer-events-none absolute inset-0 opacity-[0.4]"
           style={{
             backgroundImage:
-              "linear-gradient(white 1px, transparent 1px), linear-gradient(90deg, white 1px, transparent 1px)",
+              "linear-gradient(#f97316 1px, transparent 1px), linear-gradient(90deg, #f97316 1px, transparent 1px)",
             backgroundSize: "36px 36px",
+            maskImage: "radial-gradient(ellipse at center, black, transparent 80%)",
+            WebkitMaskImage: "radial-gradient(ellipse at center, black, transparent 80%)",
           }}
         />
-        <div className="pointer-events-none absolute -bottom-24 -right-24 size-80 rounded-full bg-violet-400/25 blur-3xl" />
+        <div className="pointer-events-none absolute -bottom-24 -right-24 size-80 rounded-full bg-amber-500/5 blur-3xl" />
 
         {/* Logo */}
         <div className="relative flex items-center gap-3">
-          <span className="grid size-10 place-items-center rounded-2xl bg-white/20 backdrop-blur-md shadow-md">
+          <span className="grid size-10 place-items-center rounded-2xl bg-orange-500 shadow-lg shadow-orange-500/25">
             <Waves className="size-5 text-white" />
           </span>
           <div className="flex flex-col">
-            <span className="font-display text-lg font-bold text-white tracking-tight">Indianvoice.ai</span>
-            <span className="text-[10px] font-semibold text-white/70 uppercase tracking-wider">Enterprise Outbound Platform</span>
+            <span className="font-display text-lg font-bold text-gray-900 tracking-tight">Indianvoice.ai</span>
+            <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">Enterprise Outbound Platform</span>
           </div>
         </div>
 
         <div className="relative space-y-8 my-auto">
           <div>
-            <div className="inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1 text-xs font-bold text-white mb-3">
-              <Sparkles className="size-3.5 text-emerald-300" /> Start 14-Day Free Trial
+            <div className="inline-flex items-center gap-2 rounded-full bg-orange-50 px-3 py-1 text-xs font-bold text-orange-600 mb-3 border border-orange-100">
+              <Sparkles className="size-3.5" /> Start 14-Day Free Trial
             </div>
-            <h2 className="font-display text-3xl font-extrabold leading-tight text-white md:text-4xl">
+            <h2 className="font-display text-3xl font-extrabold leading-tight text-gray-900 md:text-4xl">
               Deploy Your First Autonomous Voice Agent Today
             </h2>
-            <p className="mt-3 text-sm leading-relaxed text-white/80 max-w-md">
+            <p className="mt-3 text-sm leading-relaxed text-gray-500 max-w-md">
               Set up in under 5 minutes. Import your prospect list, define qualification criteria, and watch booked meetings populate your calendar.
             </p>
           </div>
@@ -152,8 +161,8 @@ function RegisterPage() {
           <ul className="space-y-3.5">
             {BENEFITS.map((b) => (
               <li key={b} className="flex items-start gap-3">
-                <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-emerald-400" />
-                <span className="text-xs md:text-sm font-medium text-white/90">{b}</span>
+                <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-emerald-500" />
+                <span className="text-xs md:text-sm font-medium text-gray-600">{b}</span>
               </li>
             ))}
           </ul>
@@ -166,20 +175,20 @@ function RegisterPage() {
               { val: "58.4%", label: "Average Connect Rate" },
               { val: "100%", label: "DNC & TCPA Compliant" },
             ].map(({ val, label }) => (
-              <div key={label} className="rounded-2xl border border-white/10 bg-white/10 p-3.5 backdrop-blur-md">
-                <p className="font-display text-xl font-bold text-white">{val}</p>
-                <p className="mt-0.5 text-[10px] text-white/70">{label}</p>
+              <div key={label} className="rounded-2xl border border-orange-100 bg-white p-3.5 shadow-sm">
+                <p className="font-display text-xl font-bold text-gray-900">{val}</p>
+                <p className="mt-0.5 text-[10px] text-gray-400">{label}</p>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="relative flex items-center justify-between border-t border-white/10 pt-4 text-[11px] text-white/60">
+        <div className="relative flex items-center justify-between border-t border-gray-100 pt-4 text-[11px] text-gray-400">
           <span className="flex items-center gap-1.5">
-            <ShieldCheck className="size-4 text-emerald-400" /> SOC-2 Type II Certified
+            <ShieldCheck className="size-4 text-emerald-500" /> SOC-2 Type II Certified
           </span>
           <span className="flex items-center gap-1.5">
-            <Lock className="size-3.5 text-white/70" /> 256-Bit Encrypted
+            <Lock className="size-3.5 text-gray-400" /> 256-Bit Encrypted
           </span>
         </div>
       </div>
@@ -189,34 +198,34 @@ function RegisterPage() {
         <div className="w-full max-w-md space-y-7">
           <div className="space-y-2">
             <div className="flex items-center justify-between">
-              <Link to="/landing" className="flex items-center gap-2 text-xs font-semibold text-ai hover:underline">
+              <Link to="/landing" className="flex items-center gap-2 text-xs font-semibold text-gray-400 hover:text-gray-900 transition-colors">
                 ← Back to overview
               </Link>
-              <span className="rounded-full bg-ai-soft px-2.5 py-0.5 text-[10px] font-bold text-ai">
+              <span className="rounded-full bg-orange-50 border border-orange-100 px-2.5 py-0.5 text-[10px] font-bold text-orange-500">
                 No Credit Card
               </span>
             </div>
 
-            <h1 className="font-display text-3xl font-extrabold tracking-tight text-foreground">
+            <h1 className="font-display text-3xl font-extrabold tracking-tight text-gray-900">
               Create Your Free Account
             </h1>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-sm text-gray-500">
               Get immediate access to your sales command center.
             </p>
           </div>
 
           {/* 1-Click Fast Trial Button */}
-          <div className="rounded-2xl border border-ai/30 bg-ai-soft/40 p-4 space-y-2">
+          <div className="rounded-2xl border border-orange-100 bg-orange-50/50 p-4 space-y-2">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-bold text-foreground flex items-center gap-1.5">
-                <Sparkles className="size-3.5 text-ai" /> Instant Sandbox Access:
+              <span className="text-xs font-bold text-gray-900 flex items-center gap-1.5">
+                <Sparkles className="size-3.5 text-orange-500" /> Instant Sandbox Access:
               </span>
-              <span className="text-[10px] text-muted-foreground">Zero setup</span>
+              <span className="text-[10px] text-gray-400">Zero setup</span>
             </div>
             <button
               type="button"
               onClick={handleQuickDemoTrial}
-              className="flex w-full items-center justify-center gap-2 rounded-xl bg-ai py-2.5 text-xs font-bold text-ai-foreground shadow-sm hover:brightness-110 active:scale-95 transition-all"
+              className="flex w-full items-center justify-center gap-2 rounded-xl bg-orange-500 py-2.5 text-xs font-bold text-white shadow-sm hover:bg-orange-600 active:scale-95 transition-all"
             >
               🚀 Launch Pre-Configured Demo Workspace
             </button>
@@ -225,58 +234,81 @@ function RegisterPage() {
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-4">
             {error && (
-              <div className="rounded-xl border border-danger/30 bg-danger-soft p-3 text-xs font-medium text-danger">
+              <div className="rounded-xl border border-red-200 bg-red-50 p-3 text-xs font-medium text-red-600">
                 {error}
               </div>
             )}
 
             <div className="space-y-1.5">
-              <label className="block text-xs font-semibold text-foreground" htmlFor="full_name">
+              <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider" htmlFor="full_name">
                 Full Name
               </label>
-              <input
-                id="full_name"
-                type="text"
-                required
-                value={form.full_name}
-                onChange={set("full_name")}
-                placeholder="Alex Morgan"
-                className="w-full rounded-xl border border-border bg-card px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/60 outline-none transition-all focus:border-ai focus:ring-2 focus:ring-ai/20 shadow-sm"
-              />
+              <div className="relative">
+                <input
+                  id="full_name"
+                  type="text"
+                  required
+                  value={form.full_name}
+                  onChange={set("full_name")}
+                  placeholder="Alex Morgan"
+                  className="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 outline-none transition-all focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 shadow-sm"
+                />
+              </div>
             </div>
 
             <div className="space-y-1.5">
-              <label className="block text-xs font-semibold text-foreground" htmlFor="reg-email">
+              <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider" htmlFor="reg-phone">
+                Phone Number
+              </label>
+              <div className="relative">
+                <input
+                  id="reg-phone"
+                  type="tel"
+                  required
+                  value={form.phone}
+                  onChange={set("phone")}
+                  placeholder="+91 98765 43210"
+                  className="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 outline-none transition-all focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 shadow-sm"
+                />
+              </div>
+            </div>
+
+            <div className="space-y-1.5">
+              <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider" htmlFor="reg-email">
                 Work Email
               </label>
-              <input
-                id="reg-email"
-                type="email"
-                autoComplete="email"
-                required
-                value={form.email}
-                onChange={set("email")}
-                placeholder="alex@company.com"
-                className="w-full rounded-xl border border-border bg-card px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/60 outline-none transition-all focus:border-ai focus:ring-2 focus:ring-ai/20 shadow-sm"
-              />
+              <div className="relative">
+                <input
+                  id="reg-email"
+                  type="email"
+                  autoComplete="email"
+                  required
+                  value={form.email}
+                  onChange={set("email")}
+                  placeholder="alex@company.com"
+                  className="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 outline-none transition-all focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 shadow-sm"
+                />
+              </div>
             </div>
 
             <div className="space-y-1.5">
-              <label className="block text-xs font-semibold text-foreground" htmlFor="workspace_name">
+              <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider" htmlFor="workspace_name">
                 Company / Workspace Name
               </label>
-              <input
-                id="workspace_name"
-                type="text"
-                value={form.workspace_name}
-                onChange={set("workspace_name")}
-                placeholder="Northstar Revenue Inc."
-                className="w-full rounded-xl border border-border bg-card px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/60 outline-none transition-all focus:border-ai focus:ring-2 focus:ring-ai/20 shadow-sm"
-              />
+              <div className="relative">
+                <input
+                  id="workspace_name"
+                  type="text"
+                  value={form.workspace_name}
+                  onChange={set("workspace_name")}
+                  placeholder="Northstar Revenue Inc."
+                  className="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 outline-none transition-all focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 shadow-sm"
+                />
+              </div>
             </div>
 
             <div className="space-y-1.5">
-              <label className="block text-xs font-semibold text-foreground" htmlFor="password">
+              <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider" htmlFor="password">
                 Password
               </label>
               <div className="relative">
@@ -288,12 +320,12 @@ function RegisterPage() {
                   value={form.password}
                   onChange={set("password")}
                   placeholder="••••••••••••"
-                  className="w-full rounded-xl border border-border bg-card px-4 py-3 pr-11 text-sm text-foreground placeholder:text-muted-foreground/60 outline-none transition-all focus:border-ai focus:ring-2 focus:ring-ai/20 shadow-sm"
+                  className="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 pr-11 text-sm text-gray-900 placeholder:text-gray-400 outline-none transition-all focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 shadow-sm"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPw(!showPw)}
-                  className="absolute inset-y-0 right-3 flex items-center text-muted-foreground hover:text-foreground"
+                  className="absolute inset-y-0 right-3 flex items-center text-gray-400 hover:text-gray-600"
                 >
                   {showPw ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
                 </button>
@@ -304,16 +336,16 @@ function RegisterPage() {
             <button
               type="submit"
               disabled={loading}
-              className="flex w-full items-center justify-center gap-2 rounded-xl bg-ai py-3.5 text-sm font-bold text-ai-foreground shadow-raised transition-all hover:brightness-110 active:scale-95 disabled:opacity-60"
+              className="flex w-full items-center justify-center gap-2 rounded-xl bg-orange-500 py-3.5 text-sm font-bold text-white shadow-lg shadow-orange-500/25 transition-all hover:bg-orange-600 active:scale-95 disabled:opacity-60 disabled:cursor-not-allowed"
             >
               {loading ? <Loader2 className="size-4 animate-spin" /> : <ArrowRight className="size-4" />}
               {loading ? "Creating workspace..." : "Get Started Free"}
             </button>
           </form>
 
-          <p className="text-center text-xs text-muted-foreground">
+          <p className="text-center text-xs text-gray-500">
             Already have an account?{" "}
-            <Link to="/login" className="font-bold text-ai hover:underline">
+            <Link to="/login" className="font-bold text-orange-500 hover:text-orange-600 transition-colors">
               Sign in
             </Link>
           </p>
